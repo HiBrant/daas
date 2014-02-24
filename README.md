@@ -17,3 +17,9 @@ daas
 <li>Added data model definition module, but not completed.</li>
 <li>Blocked in how to achieve JPA self-one-to-many relationship.</li>
 </ul>
+
+<b>2014-2-24</b>
+<ul>
+<li>Completed access from metadata to databse, and convertion from JSON to data model object.</li>
+<li>What to do next is to achieve entity generator for model definition.</li>
+</ul>
