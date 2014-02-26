@@ -23,3 +23,9 @@ daas
 <li>Completed access from metadata to databse, and convertion from JSON to data model object.</li>
 <li>What to do next is to achieve entity generator for model definition.</li>
 </ul>
+
+<b>2014-2-26</b>
+<ul>
+<li>Completed entity generation for model definition.</li>
+<li>Next is to finish model deletion.</li>
+</ul>
