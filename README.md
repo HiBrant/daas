@@ -27,5 +27,6 @@ daas
 <b>2014-2-26</b>
 <ul>
 <li>Completed entity generation for model definition.</li>
-<li>Next is to finish model deletion.</li>
+<li>Fixed some codes to make the prototype better.</li>
+<li>Next is to finish retrieving data objects in simple situation.</li>
 </ul>
