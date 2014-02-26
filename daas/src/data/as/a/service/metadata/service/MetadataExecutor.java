@@ -1,9 +1,11 @@
 package data.as.a.service.metadata.service;
 
+import net.sf.json.JSONObject;
+import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
 import data.as.a.service.metadata.datamodel.DataModelObject;
 
 public interface MetadataExecutor {
 
-	void execute(DataModelObject dmo) throws UserException;
+	JSONObject execute(DataModelObject dmo) throws UserException, SystemException;
 }

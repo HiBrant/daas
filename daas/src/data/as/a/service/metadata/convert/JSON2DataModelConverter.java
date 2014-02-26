@@ -43,7 +43,8 @@ public class JSON2DataModelConverter implements
 
 			if (source.containsKey("version")) {
 				int version = source.getInt("version");
-				dmo = new DataModelObject(appid, modelName, semanticsType, version);
+				dmo = new DataModelObject(appid, modelName, semanticsType,
+						version);
 			} else {
 				dmo = new DataModelObject(appid, modelName, semanticsType);
 			}
@@ -73,7 +74,8 @@ public class JSON2DataModelConverter implements
 			}
 
 			if (source.containsKey("__referenceModels")) {
-				JSONArray referJsonArray = source.getJSONArray("__referenceModels");
+				JSONArray referJsonArray = source
+						.getJSONArray("__referenceModels");
 				for (int i = 0; i < referJsonArray.size(); i++) {
 					JSONObject referJsonObj = referJsonArray.getJSONObject(i);
 					String attrName = referJsonObj.getString("attrName");
@@ -82,44 +84,38 @@ public class JSON2DataModelConverter implements
 					DataModelObject refModel = null;
 					if (referJsonObj.containsKey("modelVer")) {
 						int modelVersion = referJsonObj.getInt("modelVer");
-						refModel = new DataModelObject(appid, referModelName, semanticsType, modelVersion);
+						refModel = new DataModelObject(appid, referModelName,
+								semanticsType, modelVersion);
 					} else {
-						refModel = new DataModelObject(appid, referModelName, semanticsType);
+						refModel = new DataModelObject(appid, referModelName,
+								semanticsType);
 					}
-					String refClassFullPath = ClassPathUtil.getEntityFilePath(refModel);
+					String refClassFullPath = ClassPathUtil
+							.getEntityFilePath(refModel);
 					if (!new File(refClassFullPath).isFile()) {
-						throw new ReferenceModelNotExistsException(referModelName);
+						throw new ReferenceModelNotExistsException(
+								referModelName);
 					}
-					
+
 					ReferenceType refType = null;
 					if (referType.equals("one-to-one")) {
 						refType = ReferenceType.OneToOne;
 					} else if (referType.equals("one-to-many")) {
 						refType = ReferenceType.OneToMany;
 					} else {
-						throw new JSONException("Type of reference '" + attrName
-								+ "' is not supported: " + referType);
+						throw new JSONException("Type of reference '"
+								+ attrName + "' is not supported: " + referType);
 					}
-					Reference ref = new Reference(attrName, refClassFullPath, refType);
+					Reference ref = new Reference(attrName, refClassFullPath,
+							refType);
 					dmo.getReferences().add(ref);
 				}
 			}
 		} catch (JSONException e) {
 			throw new UserException(null, e);
 		}
-		
+
 		return dmo;
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-

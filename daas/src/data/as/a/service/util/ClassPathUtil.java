@@ -15,15 +15,15 @@ public class ClassPathUtil {
 	}
 	private static final String ENTITY_JPA_SUB_PACKAGE = ".entity.jpa.";
 	private static final String ENTITY_MONGO_SUB_PACKAGE = ".entity.mongo.";
-//	private static final String REPO_JPA_SUB_PACKAGE = ".repo.jpa.";
-//	private static final String REPO_MONGO_SUB_PACKAGE = ".repo.mongo.";
+	// private static final String REPO_JPA_SUB_PACKAGE = ".repo.jpa.";
+	// private static final String REPO_MONGO_SUB_PACKAGE = ".repo.mongo.";
 
-	private static final String DOT_SEPERATOR = ".";
-	private static final String FILE_SEPERATOR = "/";
-	private static final String CLASSNAME_SEPERATOR = "_";
-	private static final String CLASS_EXTENSION = ".class";
+	public static final String DOT_SEPERATOR = ".";
+	public static final String FILE_SEPERATOR = "/";
+	public static final String CLASSNAME_SEPERATOR = "_";
+	public static final String CLASS_EXTENSION = ".class";
 
-	private static String getEntityJavaClasspathWithoutExtension(
+	public static String getEntityJavaClasspathWithoutExtension(
 			DataModelObject dmo) {
 		StringBuilder builder = new StringBuilder();
 		builder.append(BASE_PACKAGE);
@@ -32,8 +32,9 @@ public class ClassPathUtil {
 		} else {
 			builder.append(ENTITY_MONGO_SUB_PACKAGE);
 		}
-		builder.append(dmo.getAppid()).append(DOT_SEPERATOR);
+
 		builder.append(dmo.getModelName()).append(CLASSNAME_SEPERATOR)
+				.append(dmo.getAppid()).append(CLASSNAME_SEPERATOR)
 				.append(dmo.getVersion());
 
 		return builder.toString();
@@ -45,33 +46,11 @@ public class ClassPathUtil {
 
 	public static String getEntityFilePath(DataModelObject dmo) {
 		StringBuilder builder = new StringBuilder(CLASS_ROOT_PATH);
-		builder.append(getEntityJavaClasspathWithoutExtension(dmo).replaceAll(
-				"\\" + DOT_SEPERATOR, FILE_SEPERATOR)).append(CLASS_EXTENSION);
-		
+		builder.append(
+				getEntityJavaClasspathWithoutExtension(dmo).replaceAll(
+						"\\" + DOT_SEPERATOR, FILE_SEPERATOR)).append(
+				CLASS_EXTENSION);
+
 		return builder.toString();
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
