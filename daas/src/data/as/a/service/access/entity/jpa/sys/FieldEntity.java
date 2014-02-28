@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "field")
+@Table(name = "field", catalog = "daas_sys")
 public class FieldEntity {
 
 	@Id

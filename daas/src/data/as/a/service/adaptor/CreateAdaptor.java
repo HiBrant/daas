@@ -52,6 +52,7 @@ public class CreateAdaptor {
 
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(
 				configClass);
+
 		Object repo = ctx.getBean(repoClass);
 		try {
 			entity = repo.getClass().getDeclaredMethod("save", Object.class)

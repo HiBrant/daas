@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "refer")
+@Table(name = "refer", catalog = "daas_sys")
 public class ReferenceEntity {
 	
 	@Id

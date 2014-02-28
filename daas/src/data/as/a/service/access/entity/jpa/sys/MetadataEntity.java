@@ -17,7 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 import data.as.a.service.util.DateFormatter;
 
 @Entity
-@Table(name = "model")
+@Table(name = "model", catalog = "daas_sys")
 public class MetadataEntity {
 	
 	@Id

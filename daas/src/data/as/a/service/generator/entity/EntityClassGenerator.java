@@ -3,6 +3,7 @@ package data.as.a.service.generator.entity;
 import java.io.IOException;
 
 import data.as.a.service.generator.Generator;
+import data.as.a.service.generator.classloader.GeneratorClassLoader;
 import data.as.a.service.generator.exception.FailToSaveClassFileException;
 import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.datamodel.SemanticsType;
@@ -27,6 +28,13 @@ public class EntityClassGenerator {
 		} catch (IOException e) {
 			throw new FailToSaveClassFileException(e);
 		}
-	}
 
+		try {
+			Class.forName(ClassPathUtil.getEntityJavaClasspath(dmo), true,
+					new GeneratorClassLoader());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

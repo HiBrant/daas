@@ -6,7 +6,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import data.as.a.service.access.entity.jpa.sys.MetadataEntity;
 import data.as.a.service.access.repo.jpa.sys.MetadataRepository;
-import data.as.a.service.generator.classloader.GeneratorClassLoader;
 import data.as.a.service.metadata.config.MetadataAccessConfig;
 import data.as.a.service.metadata.convert.DataModel2MetadataEntityConverter;
 import data.as.a.service.metadata.datamodel.DataModelObject;
@@ -44,7 +43,7 @@ public class MetadataOperator {
 
 		String classname = ClassPathUtil.getEntityJavaClasspath(dmo);
 		try {
-			clazz = Class.forName(classname, true, new GeneratorClassLoader());
+			clazz = Class.forName(classname);
 		} catch (ClassNotFoundException e) {
 			throw new ModelClassMissingException(classname, e);
 		}
