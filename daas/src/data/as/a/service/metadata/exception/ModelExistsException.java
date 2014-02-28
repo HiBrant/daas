@@ -8,7 +8,7 @@ public class ModelExistsException extends UserException {
 
 	public ModelExistsException(String modelName, int version) {
 		super("There has been a existing model named \"" + modelName
-				+ "\", ver." + version, null);
+				+ "\", ver." + version);
 	}
 
 }

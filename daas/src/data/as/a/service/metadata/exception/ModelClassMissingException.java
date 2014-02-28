@@ -6,8 +6,8 @@ public class ModelClassMissingException extends SystemException {
 
 	private static final long serialVersionUID = -9035117522578252273L;
 
-	public ModelClassMissingException(String classname) {
-		super("The Java class file named " + classname + " is missing.", null);
+	public ModelClassMissingException(String classname, Throwable e) {
+		super("The Java class file named " + classname + " is missing.", e);
 	}
 
 }

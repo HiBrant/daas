@@ -1,4 +1,4 @@
-package data.as.a.service.metadata.service;
+package data.as.a.service.metadata;
 
 import net.sf.json.JSONObject;
 import data.as.a.service.exception.SystemException;

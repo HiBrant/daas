@@ -43,5 +43,13 @@ public class Fields implements Iterable<Field> {
 	public Iterator<Field> iterator() {
 		return fields.iterator();
 	}
+	
+	public Field getField(String name) {
+		if (!this.hasField(name)) {
+			return null;
+		}
+		
+		return fields.get(namesAndIndexes.get(name));
+	}
 
 }

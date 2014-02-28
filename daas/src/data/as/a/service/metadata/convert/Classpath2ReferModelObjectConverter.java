@@ -20,13 +20,13 @@ public class Classpath2ReferModelObjectConverter implements
 
 		File file = new File(source);
 		if (!file.isFile()) {
-			throw new ModelClassMissingException(classname);
+			throw new ModelClassMissingException(classname, null);
 		}
 
 		String[] strs = classname.split(ClassPathUtil.CLASSNAME_SEPERATOR);
 		String version = strs[strs.length - 1];
 		String appid = strs[strs.length - 2];
-		String modelName = classname.substring(0, classname.indexOf(appid) - 1);
+		String modelName = classname.substring(0, classname.indexOf(appid) - 8);
 
 		return new DataModelObject(appid, modelName, null,
 				Integer.parseInt(version));

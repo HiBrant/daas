@@ -46,5 +46,9 @@ public class DataModelObject {
 	public References getReferences() {
 		return references;
 	}
+
+	public void setSemantics(SemanticsType semantics) {
+		this.semantics = semantics;
+	}
 	
 }

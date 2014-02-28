@@ -7,7 +7,7 @@ public class RepeatedVariableNameException extends UserException {
 	private static final long serialVersionUID = -8489850960163474576L;
 
 	public RepeatedVariableNameException(String variableName) {
-		super("Field with the name of \"" + variableName + "\" has already existed.", null);
+		super("Field with the name of \"" + variableName + "\" has already existed.");
 	}
 
 }

@@ -30,9 +30,8 @@ public class JPAEntityClassGenerator implements Generator {
 
 		StringBuilder sb;
 		FieldType2JavaTypeConverter tc = new FieldType2JavaTypeConverter();
-		String classpath = ClassPathUtil
-				.getEntityJavaClasspathWithoutExtension(dmo).replaceAll(
-						ClassPathUtil.DOT_SEPERATOR,
+		String classpath = ClassPathUtil.getEntityJavaClasspath(dmo)
+				.replaceAll("\\" + ClassPathUtil.DOT_SEPERATOR,
 						ClassPathUtil.FILE_SEPERATOR);
 
 		cw.visit(V1_7, ACC_PUBLIC + ACC_SUPER, classpath, null,
