@@ -14,6 +14,7 @@ import data.as.a.service.adaptor.convert.EntityObject2JSONConverter;
 import data.as.a.service.adaptor.convert.JSON2EntityObjectConverter;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
+import data.as.a.service.generator.exception.FailToLoadClassException;
 import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.datamodel.SemanticsType;
 import data.as.a.service.util.ClassPathUtil;
@@ -39,8 +40,8 @@ public class CreateAdaptor {
 			repoClass = Class.forName(ClassPathUtil
 					.getRepositoryJavaClasspathWithoutConditions(dmo));
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new FailToLoadClassException(
+					ClassPathUtil.getRepositoryJavaClasspathWithoutConditions(dmo), e);
 		}
 
 		Class<?> configClass = null;
