@@ -4,19 +4,15 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import net.sf.json.JSONObject;
-import data.as.a.service.adaptor.config.MongoDBConfig;
-import data.as.a.service.adaptor.config.MySQLJPAConfig;
+import data.as.a.service.adaptor.config.ApplicationContextHolder;
 import data.as.a.service.adaptor.convert.EntityObject2JSONConverter;
 import data.as.a.service.adaptor.convert.JSON2EntityObjectConverter;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
 import data.as.a.service.generator.exception.FailToLoadClassException;
 import data.as.a.service.metadata.datamodel.DataModelObject;
-import data.as.a.service.metadata.datamodel.SemanticsType;
 import data.as.a.service.util.ClassPathUtil;
 
 public class CreateAdaptor {
@@ -44,15 +40,8 @@ public class CreateAdaptor {
 					ClassPathUtil.getRepositoryJavaClasspathWithoutConditions(dmo), e);
 		}
 
-		Class<?> configClass = null;
-		if (dmo.getSemantics() == SemanticsType.ACID) {
-			configClass = MySQLJPAConfig.class;
-		} else {
-			configClass = MongoDBConfig.class;
-		}
-
-		ApplicationContext ctx = new AnnotationConfigApplicationContext(
-				configClass);
+		ApplicationContextHolder ctxHolder = new ApplicationContextHolder(dmo.getSemantics());
+		ApplicationContext ctx = ctxHolder.getApplicationContext();
 
 		Object repo = ctx.getBean(repoClass);
 		try {
@@ -74,7 +63,7 @@ public class CreateAdaptor {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		((ConfigurableApplicationContext) ctx).close();
+		ctxHolder.close();
 
 		return new EntityObject2JSONConverter().convert(entity);
 	}
