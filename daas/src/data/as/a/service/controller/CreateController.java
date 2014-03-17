@@ -36,9 +36,8 @@ public class CreateController {
 			throw new ModelNotExistsException(modelName, version);
 		}
 		
-		Class<?> clazz = MetadataOperator.getEntityClass(dmo);
 		CreateAdaptor adaptor = new CreateAdaptor();
-		return adaptor.execute(dmo, clazz, JSONObject.fromObject(json));
+		return adaptor.execute(dmo, JSONObject.fromObject(json));
 	}
 
 }

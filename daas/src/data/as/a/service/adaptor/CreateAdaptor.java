@@ -9,16 +9,21 @@ import net.sf.json.JSONObject;
 import data.as.a.service.adaptor.config.ApplicationContextHolder;
 import data.as.a.service.adaptor.convert.EntityObject2JSONConverter;
 import data.as.a.service.adaptor.convert.JSON2EntityObjectConverter;
+import data.as.a.service.adaptor.exception.FailToCallRepositoryMethodException;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
 import data.as.a.service.generator.exception.FailToLoadClassException;
 import data.as.a.service.metadata.datamodel.DataModelObject;
+import data.as.a.service.metadata.service.MetadataOperator;
 import data.as.a.service.util.ClassPathUtil;
 
-public class CreateAdaptor {
+public class CreateAdaptor implements Adaptor {
 
-	public JSONObject execute(DataModelObject dmo, Class<?> entityClass,
-			JSONObject entityJson) throws SystemException, UserException {
+	@Override
+	public JSONObject execute(DataModelObject dmo, JSONObject entityJson)
+			throws SystemException, UserException {
+
+		Class<?> entityClass = MetadataOperator.getEntityClass(dmo);
 
 		JSON2EntityObjectConverter converter = new JSON2EntityObjectConverter(
 				entityClass);
@@ -37,31 +42,29 @@ public class CreateAdaptor {
 					.getRepositoryJavaClasspathWithoutConditions(dmo));
 		} catch (ClassNotFoundException e) {
 			throw new FailToLoadClassException(
-					ClassPathUtil.getRepositoryJavaClasspathWithoutConditions(dmo), e);
+					ClassPathUtil
+							.getRepositoryJavaClasspathWithoutConditions(dmo),
+					e);
 		}
 
-		ApplicationContextHolder ctxHolder = new ApplicationContextHolder(dmo.getSemantics());
+		ApplicationContextHolder ctxHolder = new ApplicationContextHolder(
+				dmo.getSemantics());
 		ApplicationContext ctx = ctxHolder.getApplicationContext();
 
 		Object repo = ctx.getBean(repoClass);
 		try {
-			entity = repo.getClass().getDeclaredMethod("save", Object.class)
+			entity = repo.getClass().getDeclaredMethod(METHOD_SAVE, Object.class)
 					.invoke(repo, entity);
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new FailToCallRepositoryMethodException(repoClass, METHOD_SAVE, e);
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new FailToCallRepositoryMethodException(repoClass, METHOD_SAVE, e);
 		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new FailToCallRepositoryMethodException(repoClass, METHOD_SAVE, e);
 		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new FailToCallRepositoryMethodException(repoClass, METHOD_SAVE, e);
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new FailToCallRepositoryMethodException(repoClass, METHOD_SAVE, e);
 		}
 		ctxHolder.close();
 

@@ -30,8 +30,7 @@ public class GeneratorClassLoader extends ClassLoader {
 		} catch (FileNotFoundException e) {
 			throw new ClassNotFoundException(name, e);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new ClassNotFoundException(name, e);
 		}
 
 		return this.defineClass(name, b, 0, b.length);

@@ -3,6 +3,7 @@ package data.as.a.service.adaptor.convert;
 import java.lang.reflect.Field;
 
 import net.sf.json.JSONObject;
+import data.as.a.service.adaptor.exception.FailToAccessEntityFieldException;
 import data.as.a.service.convert.Converter;
 import data.as.a.service.exception.SystemException;
 
@@ -12,22 +13,22 @@ public class EntityObject2JSONConverter implements
 	@Override
 	public JSONObject convert(Object source) throws SystemException {
 		JSONObject json = new JSONObject();
-		
+
 		Field[] fields = source.getClass().getDeclaredFields();
-		for (Field field: fields) {
+		for (Field field : fields) {
 			try {
 				String name = field.getName();
 				Object value = field.get(source);
 				json.put(name, value);
 			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new FailToAccessEntityFieldException(source.getClass()
+						.getName(), field.getName(), e);
 			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				throw new FailToAccessEntityFieldException(source.getClass()
+						.getName(), field.getName(), e);
 			}
 		}
-		
+
 		return json;
 	}
 
