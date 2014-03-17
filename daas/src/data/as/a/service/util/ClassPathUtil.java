@@ -5,7 +5,7 @@ import data.as.a.service.metadata.datamodel.SemanticsType;
 
 public class ClassPathUtil {
 
-	private static final String BASE_PACKAGE = "data.as.a.service.access";
+	public static final String BASE_PACKAGE = "data.as.a.service.access";
 	private static final String CLASS_ROOT_PATH;
 	static {
 		String path = ClassPathUtil.class.getProtectionDomain().getCodeSource()
@@ -56,7 +56,7 @@ public class ClassPathUtil {
 		return builder.toString();
 	}
 
-	public static String getEntityFilePathByClassFullName(String classFullName) {
+	public static String getFilePathByClassFullName(String classFullName) {
 		StringBuilder builder = new StringBuilder(CLASS_ROOT_PATH);
 		builder.append(
 				classFullName.replaceAll("\\" + DOT_SEPERATOR, FILE_SEPERATOR))

@@ -11,14 +11,18 @@ public class GeneratorClassLoader extends ClassLoader {
 
 	@Override
 	protected Class<?> findClass(String name) throws ClassNotFoundException {
-		
+
+		System.out.println(name);
 		Class<?> clazz = this.findLoadedClass(name);
 		if (clazz != null) {
 			return clazz;
 		}
+		
+		if (!name.startsWith(ClassPathUtil.BASE_PACKAGE)) {
+			return Class.forName(name);
+		}
 
-		String classFilePath = ClassPathUtil
-				.getEntityFilePathByClassFullName(name);System.out.println(classFilePath);
+		String classFilePath = ClassPathUtil.getFilePathByClassFullName(name);
 		byte[] b = null;
 		try {
 			BufferedInputStream is = new BufferedInputStream(

@@ -13,6 +13,7 @@ import data.as.a.service.adaptor.exception.FailToCallRepositoryMethodException;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
 import data.as.a.service.generator.exception.FailToLoadClassException;
+import data.as.a.service.generator.repo.RepositoryClassGenerator;
 import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.service.MetadataOperator;
 import data.as.a.service.util.ClassPathUtil;
@@ -33,7 +34,7 @@ public class CreateAdaptor implements Adaptor {
 				.getRepositoryFilePathWithoutConditions(dmo);
 		File file = new File(repoFilepath);
 		if (!file.isFile()) {
-			// TODO Repository generation
+			RepositoryClassGenerator.generate(dmo);
 		}
 
 		Class<?> repoClass = null;
