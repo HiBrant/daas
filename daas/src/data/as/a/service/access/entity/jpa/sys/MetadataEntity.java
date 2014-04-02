@@ -1,6 +1,6 @@
 package data.as.a.service.access.entity.jpa.sys;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,13 +37,13 @@ public class MetadataEntity {
 	@Column
 	private int version;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "model_id")
-	private List<FieldEntity> fields;
+	private Set<FieldEntity> fields;
 	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "model_id")
-	private List<ReferenceEntity> references;
+	private Set<ReferenceEntity> references;
 	
 	@Column
 	private String lastModifyTime = DateFormatter.now();
@@ -88,19 +88,19 @@ public class MetadataEntity {
 		this.version = version;
 	}
 	
-	public List<FieldEntity> getFields() {
+	public Set<FieldEntity> getFields() {
 		return fields;
 	}
 	
-	public void setFields(List<FieldEntity> fields) {
+	public void setFields(Set<FieldEntity> fields) {
 		this.fields = fields;
 	}
 	
-	public List<ReferenceEntity> getReferences() {
+	public Set<ReferenceEntity> getReferences() {
 		return references;
 	}
 	
-	public void setReferences(List<ReferenceEntity> references) {
+	public void setReferences(Set<ReferenceEntity> references) {
 		this.references = references;
 	}
 

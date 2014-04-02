@@ -1,7 +1,7 @@
 package data.as.a.service.metadata.convert;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import data.as.a.service.access.entity.jpa.sys.FieldEntity;
 import data.as.a.service.access.entity.jpa.sys.MetadataEntity;
@@ -23,7 +23,7 @@ public class DataModel2MetadataEntityConverter implements
 		meta.setSemantics(dmo.getSemantics().name());
 		meta.setVersion(dmo.getVersion());
 
-		List<FieldEntity> fieldList = new ArrayList<>();
+		Set<FieldEntity> fieldList = new HashSet<>();
 		for (Field f : dmo.getFields()) {
 			FieldEntity field = new FieldEntity();
 			field.setName(f.getName());
@@ -32,7 +32,7 @@ public class DataModel2MetadataEntityConverter implements
 		}
 		meta.setFields(fieldList);
 
-		List<ReferenceEntity> refList = new ArrayList<>();
+		Set<ReferenceEntity> refList = new HashSet<>();
 		for (Reference r : dmo.getReferences()) {
 			ReferenceEntity ref = new ReferenceEntity();
 			ref.setAttrName(r.getName());

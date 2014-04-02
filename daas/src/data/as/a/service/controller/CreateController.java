@@ -17,7 +17,7 @@ import data.as.a.service.adaptor.exception.ModelNotExistsException;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
 import data.as.a.service.metadata.datamodel.DataModelObject;
-import data.as.a.service.metadata.service.MetadataOperator;
+import data.as.a.service.metadata.service.MetadataAccessService;
 
 @Controller
 public class CreateController {
@@ -31,13 +31,31 @@ public class CreateController {
 			@PathVariable String modelName, @PathVariable int version,
 			@RequestBody String json) throws UserException, SystemException {
 
-		DataModelObject dmo = new DataModelObject(appid, modelName, null, version);
-		if (!MetadataOperator.dataModelExists(dmo)) {
+		DataModelObject dmo = new DataModelObject(appid, modelName, null,
+				version);
+		if (!MetadataAccessService.dataModelExists(dmo)) {
 			throw new ModelNotExistsException(modelName, version);
+		}
+
+		CreateAdaptor adaptor = new CreateAdaptor();
+		return adaptor.execute(dmo, JSONObject.fromObject(json));
+	}
+
+	@RequestMapping(value = "/{modelName}", method = RequestMethod.POST)
+	@ResponseBody
+	@ResponseStatus(HttpStatus.CREATED)
+	public Object createWithoutVersion(
+			@RequestHeader(value = "daas-app-id", required = false) String appid,
+			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
+			@PathVariable String modelName, @RequestBody String json)
+			throws UserException, SystemException {
+
+		DataModelObject dmo = new DataModelObject(appid, modelName, null);
+		if (!MetadataAccessService.dataModelExists(dmo)) {
+			throw new ModelNotExistsException(modelName, 1);
 		}
 		
 		CreateAdaptor adaptor = new CreateAdaptor();
 		return adaptor.execute(dmo, JSONObject.fromObject(json));
 	}
-
 }

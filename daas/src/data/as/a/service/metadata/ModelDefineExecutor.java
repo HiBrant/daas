@@ -7,7 +7,7 @@ import data.as.a.service.generator.entity.EntityClassGenerator;
 import data.as.a.service.metadata.convert.MetadataEntity2JSONConverter;
 import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.exception.ModelExistsException;
-import data.as.a.service.metadata.service.MetadataOperator;
+import data.as.a.service.metadata.service.MetadataCreateService;
 
 public class ModelDefineExecutor implements MetadataExecutor {
 
@@ -15,7 +15,7 @@ public class ModelDefineExecutor implements MetadataExecutor {
 	public JSONObject execute(DataModelObject dmo) throws ModelExistsException,
 			SystemException {
 
-		MetadataEntity meta = MetadataOperator.saveModelIntoDatabase(dmo);
+		MetadataEntity meta = MetadataCreateService.saveModelIntoDatabase(dmo);
 		EntityClassGenerator.generate(dmo);
 		return new MetadataEntity2JSONConverter().convert(meta);
 	}

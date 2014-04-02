@@ -15,7 +15,7 @@ import data.as.a.service.exception.UserException;
 import data.as.a.service.generator.exception.FailToLoadClassException;
 import data.as.a.service.generator.repo.RepositoryClassGenerator;
 import data.as.a.service.metadata.datamodel.DataModelObject;
-import data.as.a.service.metadata.service.MetadataOperator;
+import data.as.a.service.metadata.service.MetadataAccessService;
 import data.as.a.service.util.ClassPathUtil;
 
 public class CreateAdaptor implements Adaptor {
@@ -24,7 +24,7 @@ public class CreateAdaptor implements Adaptor {
 	public JSONObject execute(DataModelObject dmo, JSONObject entityJson)
 			throws SystemException, UserException {
 
-		Class<?> entityClass = MetadataOperator.getEntityClass(dmo);
+		Class<?> entityClass = MetadataAccessService.getEntityClass(dmo);
 
 		JSON2EntityObjectConverter converter = new JSON2EntityObjectConverter(
 				entityClass);

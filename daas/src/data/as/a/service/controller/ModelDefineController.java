@@ -18,7 +18,7 @@ import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.ModelDefineExecutor;
 
 @Controller
-public class MetadataController {
+public class ModelDefineController {
 
 	@RequestMapping(value = "/__model", method = RequestMethod.POST)
 	@ResponseBody
