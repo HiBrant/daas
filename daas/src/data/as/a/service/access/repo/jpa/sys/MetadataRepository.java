@@ -11,5 +11,8 @@ public interface MetadataRepository extends
 
 	MetadataEntity findByAppidAndModelNameAndVersion(String appid,
 			String modelName, int version);
+
 	List<MetadataEntity> findByAppid(String appid);
+
+	List<MetadataEntity> findByAppidAndModelName(String appid, String modelName);
 }
