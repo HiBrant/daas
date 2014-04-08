@@ -20,7 +20,7 @@ import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 
 @Controller
-public class CreateController {
+public class DOCreateController {
 	
 	private ModelCheckExistExecutor executor = new ModelCheckExistExecutor();
 

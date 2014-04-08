@@ -5,10 +5,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.springframework.context.ApplicationContext;
 
-import net.sf.json.JSONObject;
 import data.as.a.service.adaptor.config.ApplicationContextHolder;
-import data.as.a.service.adaptor.convert.EntityObject2JSONConverter;
-import data.as.a.service.adaptor.convert.JSON2EntityObjectConverter;
 import data.as.a.service.adaptor.exception.FailToCallRepositoryMethodException;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
@@ -16,19 +13,12 @@ import data.as.a.service.generator.exception.FailToLoadClassException;
 import data.as.a.service.generator.repo.RepositoryClassGenerator;
 import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.util.ClassPathUtil;
-import data.as.a.service.util.ClassUtil;
 
-public class CreateAdaptor implements Adaptor<JSONObject, JSONObject> {
+public class DeleteAdaptor implements Adaptor<String, Boolean> {
 
 	@Override
-	public JSONObject execute(DataModelObject dmo, JSONObject entityJson)
+	public Boolean execute(DataModelObject dmo, String _id)
 			throws SystemException, UserException {
-
-		Class<?> entityClass = ClassUtil.getEntityClass(dmo);
-
-		JSON2EntityObjectConverter converter = new JSON2EntityObjectConverter(
-				entityClass);
-		Object entity = converter.convert(JSONObject.fromObject(entityJson));
 
 		String repoFilepath = ClassPathUtil
 				.getRepositoryFilePathWithoutConditions(dmo);
@@ -54,21 +44,27 @@ public class CreateAdaptor implements Adaptor<JSONObject, JSONObject> {
 
 		Object repo = ctx.getBean(repoClass);
 		try {
-			entity = repo.getClass().getDeclaredMethod(METHOD_SAVE, Object.class)
-					.invoke(repo, entity);
+			repo.getClass().getDeclaredMethod(METHOD_DELETE, String.class)
+					.invoke(repo, _id);
 		} catch (IllegalAccessException e) {
-			throw new FailToCallRepositoryMethodException(repoClass, METHOD_SAVE, e);
+			throw new FailToCallRepositoryMethodException(repoClass,
+					METHOD_DELETE, e);
 		} catch (IllegalArgumentException e) {
-			throw new FailToCallRepositoryMethodException(repoClass, METHOD_SAVE, e);
+			throw new FailToCallRepositoryMethodException(repoClass,
+					METHOD_DELETE, e);
 		} catch (InvocationTargetException e) {
-			throw new FailToCallRepositoryMethodException(repoClass, METHOD_SAVE, e);
+			throw new FailToCallRepositoryMethodException(repoClass,
+					METHOD_DELETE, e);
 		} catch (NoSuchMethodException e) {
-			throw new FailToCallRepositoryMethodException(repoClass, METHOD_SAVE, e);
+			throw new FailToCallRepositoryMethodException(repoClass,
+					METHOD_DELETE, e);
 		} catch (SecurityException e) {
-			throw new FailToCallRepositoryMethodException(repoClass, METHOD_SAVE, e);
+			throw new FailToCallRepositoryMethodException(repoClass,
+					METHOD_DELETE, e);
 		}
 		ctxHolder.close();
 
-		return new EntityObject2JSONConverter().convert(entity);
+		return true;
 	}
+
 }
