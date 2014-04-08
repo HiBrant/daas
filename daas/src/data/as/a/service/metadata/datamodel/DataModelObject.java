@@ -2,8 +2,6 @@ package data.as.a.service.metadata.datamodel;
 
 public class DataModelObject {
 
-	private String _id;
-	
 	private String appid;
 	private String modelName;
 	private SemanticsType semantics;
@@ -23,10 +21,6 @@ public class DataModelObject {
 		this(appid, modelName, semantics, 1);
 	}
 	
-	public DataModelObject(String _id) {
-		this._id = _id;
-	}
-
 	public String getAppid() {
 		return appid;
 	}
@@ -61,8 +55,4 @@ public class DataModelObject {
 		this.semantics = semantics;
 	}
 
-	public String get_id() {
-		return _id;
-	}
-	
 }
