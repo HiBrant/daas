@@ -17,10 +17,12 @@ import data.as.a.service.adaptor.exception.ModelNotExistsException;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
 import data.as.a.service.metadata.datamodel.DataModelObject;
-import data.as.a.service.metadata.service.MetadataAccessService;
+import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 
 @Controller
 public class CreateController {
+	
+	private ModelCheckExistExecutor executor = new ModelCheckExistExecutor();
 
 	@RequestMapping(value = "/{modelName}/{version}", method = RequestMethod.POST)
 	@ResponseBody
@@ -33,7 +35,8 @@ public class CreateController {
 
 		DataModelObject dmo = new DataModelObject(appid, modelName, null,
 				version);
-		if (!MetadataAccessService.dataModelExists(dmo)) {
+		
+		if (!executor.execute(dmo)) {
 			throw new ModelNotExistsException(modelName, version);
 		}
 
@@ -51,7 +54,7 @@ public class CreateController {
 			throws UserException, SystemException {
 
 		DataModelObject dmo = new DataModelObject(appid, modelName, null);
-		if (!MetadataAccessService.dataModelExists(dmo)) {
+		if (!executor.execute(dmo)) {
 			throw new ModelNotExistsException(modelName, 1);
 		}
 		

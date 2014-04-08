@@ -1,21 +1,34 @@
-package data.as.a.service.metadata.service;
+package data.as.a.service.metadata.executors;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import net.sf.json.JSONObject;
 import data.as.a.service.access.entity.jpa.sys.MetadataEntity;
 import data.as.a.service.access.repo.jpa.sys.MetadataRepository;
+import data.as.a.service.exception.SystemException;
+import data.as.a.service.generator.entity.EntityClassGenerator;
+import data.as.a.service.metadata.MetadataExecutor;
 import data.as.a.service.metadata.config.MetadataAccessConfig;
 import data.as.a.service.metadata.convert.DataModel2MetadataEntityConverter;
+import data.as.a.service.metadata.convert.MetadataEntity2JSONConverter;
 import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.exception.ModelExistsException;
 
-public class MetadataCreateService {
+public class ModelDefineExecutor implements MetadataExecutor {
 
-	public static MetadataEntity saveModelIntoDatabase(DataModelObject dmo)
+	@Override
+	public JSONObject execute(DataModelObject dmo) throws ModelExistsException,
+			SystemException {
+
+		MetadataEntity meta = this.saveModelIntoDatabase(dmo);
+		EntityClassGenerator.generate(dmo);
+		return new MetadataEntity2JSONConverter().convert(meta);
+	}
+
+	private MetadataEntity saveModelIntoDatabase(DataModelObject dmo)
 			throws ModelExistsException {
-
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(
 				MetadataAccessConfig.class);
 		MetadataRepository repo = ctx.getBean(MetadataRepository.class);

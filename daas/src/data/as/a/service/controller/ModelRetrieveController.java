@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
 import data.as.a.service.metadata.MetadataExecutor;
-import data.as.a.service.metadata.ModelRetrieveAllExecutor;
-import data.as.a.service.metadata.ModelRetrieveByNameExecutor;
-import data.as.a.service.metadata.ModelRetrieveOneExecutor;
 import data.as.a.service.metadata.datamodel.DataModelObject;
+import data.as.a.service.metadata.executors.ModelRetrieveAllExecutor;
+import data.as.a.service.metadata.executors.ModelRetrieveByNameExecutor;
+import data.as.a.service.metadata.executors.ModelRetrieveOneExecutor;
 
 @Controller
 public class ModelRetrieveController {

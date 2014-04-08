@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
+import data.as.a.service.metadata.MetadataExecutor;
 import data.as.a.service.metadata.convert.JSON2DataModelConverter;
 import data.as.a.service.metadata.datamodel.DataModelObject;
-import data.as.a.service.metadata.ModelDefineExecutor;
+import data.as.a.service.metadata.executors.ModelDefineExecutor;
 
 @Controller
 public class ModelDefineController {
@@ -31,8 +32,8 @@ public class ModelDefineController {
 		JSON2DataModelConverter converter = new JSON2DataModelConverter(appid);
 		DataModelObject dmo = converter.convert(JSONObject.fromObject(json));
 
-		ModelDefineExecutor mde = new ModelDefineExecutor();
-		return mde.execute(dmo);
+		MetadataExecutor executor = new ModelDefineExecutor();
+		return executor.execute(dmo);
 
 	}
 }
