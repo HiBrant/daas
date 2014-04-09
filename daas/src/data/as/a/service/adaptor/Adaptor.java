@@ -12,4 +12,5 @@ public interface Adaptor<P, R> {
 	
 	static final String METHOD_SAVE = "save";
 	static final String METHOD_DELETE = "delete";
+	static final String METHOD_EXISTS = "exists";
 }

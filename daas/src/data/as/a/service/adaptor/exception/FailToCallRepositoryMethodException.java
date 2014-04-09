@@ -8,7 +8,7 @@ public class FailToCallRepositoryMethodException extends SystemException {
 
 	public FailToCallRepositoryMethodException(Class<?> repoClass,
 			String methodName, Throwable e) {
-		super("Fail to call the method: " + methodName + " of repository: "
+		super("Fail to call the [method: " + methodName + "] of repository: "
 				+ repoClass.getName() + ", because of exception: "
 				+ e.getClass().getSimpleName(), e);
 	}
