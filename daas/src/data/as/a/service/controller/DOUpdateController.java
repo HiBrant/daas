@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import data.as.a.service.adaptor.CreateOneAdaptor;
+import data.as.a.service.adaptor.UpdateOneAdaptor;
 import data.as.a.service.adaptor.exception.ModelNotExistsException;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
@@ -20,38 +20,41 @@ import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 
 @Controller
-public class DOCreateController {
-	
-	@RequestMapping(value = "/{modelName}/{version}", method = RequestMethod.POST)
+public class DOUpdateController {
+
+	@RequestMapping(value = "/{modelName}/{version}/{_id}", method = RequestMethod.PUT)
 	@ResponseBody
-	@ResponseStatus(HttpStatus.CREATED)
-	public Object create(
+	@ResponseStatus(HttpStatus.OK)
+	public Object update(
 			@RequestHeader(value = "daas-app-id", required = false) String appid,
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
 			@PathVariable String modelName, @PathVariable int version,
-			@RequestBody String json) throws UserException, SystemException {
+			@PathVariable String _id, @RequestBody String json)
+			throws UserException, SystemException {
 
 		DataModelObject dmo = new DataModelObject(appid, modelName, null,
 				version);
-		
 		ModelCheckExistExecutor executor = new ModelCheckExistExecutor();
 		if (!executor.execute(dmo)) {
 			throw new ModelNotExistsException(modelName, version);
 		}
 
-		CreateOneAdaptor adaptor = new CreateOneAdaptor();
-		return adaptor.execute(dmo, JSONObject.fromObject(json));
+		JSONObject updateJson = JSONObject.fromObject(json);
+		updateJson.put("_id", _id);
+
+		UpdateOneAdaptor adaptor = new UpdateOneAdaptor();
+		return adaptor.execute(dmo, updateJson);
 	}
 
-	@RequestMapping(value = "/{modelName}", method = RequestMethod.POST)
+	@RequestMapping(value = "/{modelName}/{_id}", method = RequestMethod.PUT)
 	@ResponseBody
-	@ResponseStatus(HttpStatus.CREATED)
-	public Object create(
+	@ResponseStatus(HttpStatus.OK)
+	public Object update(
 			@RequestHeader(value = "daas-app-id", required = false) String appid,
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
-			@PathVariable String modelName, @RequestBody String json)
-			throws UserException, SystemException {
+			@PathVariable String modelName, @PathVariable String _id,
+			@RequestBody String json) throws UserException, SystemException {
 
-		return this.create(appid, apiKey, modelName, 1, json);
+		return this.update(appid, apiKey, modelName, 1, _id, json);
 	}
 }

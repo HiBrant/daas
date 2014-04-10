@@ -18,7 +18,7 @@ import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.util.ClassPathUtil;
 import data.as.a.service.util.ClassUtil;
 
-public class CreateAdaptor implements Adaptor<JSONObject, JSONObject> {
+public class CreateOneAdaptor implements Adaptor<JSONObject, JSONObject> {
 
 	@Override
 	public JSONObject execute(DataModelObject dmo, JSONObject entityJson)
