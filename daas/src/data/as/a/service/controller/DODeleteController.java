@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import data.as.a.service.adaptor.exception.ModelNotExistsException;
+import data.as.a.service.adaptor.impl.DeleteBatchAdaptor;
 import data.as.a.service.adaptor.impl.DeleteOneAdaptor;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
@@ -27,7 +28,8 @@ public class DODeleteController {
 			@PathVariable String _id) throws UserException, SystemException {
 
 		ModelCheckExistExecutor executor = new ModelCheckExistExecutor();
-		DataModelObject dmo = new DataModelObject(appid, modelName, null, version);
+		DataModelObject dmo = new DataModelObject(appid, modelName, null,
+				version);
 		if (!executor.execute(dmo)) {
 			throw new ModelNotExistsException(modelName, version);
 		}
@@ -45,5 +47,35 @@ public class DODeleteController {
 			throws UserException, SystemException {
 
 		this.delete(appid, apiKey, modelName, 1, _id);
+	}
+
+	@RequestMapping(value = "/{modelName}/{version}/all", method = RequestMethod.DELETE)
+	@ResponseStatus(HttpStatus.OK)
+	public void deleteAll(
+			@RequestHeader(value = "daas-app-id", required = false) String appid,
+			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
+			@PathVariable String modelName, @PathVariable int version)
+			throws UserException, SystemException {
+
+		DataModelObject dmo = new DataModelObject(appid, modelName, null,
+				version);
+		ModelCheckExistExecutor executor = new ModelCheckExistExecutor();
+		if (!executor.execute(dmo)) {
+			throw new ModelNotExistsException(modelName, version);
+		}
+
+		DeleteBatchAdaptor adaptor = new DeleteBatchAdaptor();
+		adaptor.execute(dmo, null);
+	}
+
+	@RequestMapping(value = "/{modelName}/all", method = RequestMethod.DELETE)
+	@ResponseStatus(HttpStatus.OK)
+	public void deleteAll(
+			@RequestHeader(value = "daas-app-id", required = false) String appid,
+			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
+			@PathVariable String modelName) throws UserException,
+			SystemException {
+
+		this.deleteAll(appid, apiKey, modelName, 1);
 	}
 }

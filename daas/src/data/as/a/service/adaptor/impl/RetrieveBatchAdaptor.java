@@ -8,11 +8,11 @@ import org.springframework.context.ApplicationContext;
 
 import net.sf.json.JSONObject;
 import data.as.a.service.adaptor.Adaptor;
-import data.as.a.service.adaptor.condition.SortAndPage;
+import data.as.a.service.adaptor.condition.Conditions;
 import data.as.a.service.adaptor.config.ApplicationContextHolder;
 import data.as.a.service.adaptor.convert.EntityList2JSONConverter;
 import data.as.a.service.adaptor.exception.FailToCallRepositoryMethodException;
-import data.as.a.service.exception.StillBeingDevelopingException;
+import data.as.a.service.exception.StillDevelopingException;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
 import data.as.a.service.generator.exception.FailToLoadClassException;
@@ -20,17 +20,17 @@ import data.as.a.service.generator.repo.RepositoryClassGenerator;
 import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.util.ClassPathUtil;
 
-public class RetrieveAllAdaptor implements Adaptor<SortAndPage, JSONObject> {
+public class RetrieveBatchAdaptor implements Adaptor<Conditions, JSONObject> {
 
 	@Override
-	public JSONObject execute(DataModelObject dmo, SortAndPage sortAndPage)
+	public JSONObject execute(DataModelObject dmo, Conditions conditions)
 			throws SystemException, UserException {
 
-		if (sortAndPage == null) {
+		if (conditions == null) {
 			return findAll(dmo);
 		} else {
-			throw new StillBeingDevelopingException("RetrieveAllAdaptor",
-					"execute", "sortAndPage is not null");
+			throw new StillDevelopingException(RetrieveBatchAdaptor.class,
+					"execute", "Query conditions are not null");
 		}
 
 	}

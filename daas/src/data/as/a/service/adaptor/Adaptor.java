@@ -15,4 +15,5 @@ public interface Adaptor<P, R> {
 	static final String METHOD_EXISTS = "exists";
 	static final String METHOD_FIND_ONE = "findOne";
 	static final String METHOD_FIND_ALL = "findAll";
+	static final String METHOD_DELETE_ALL = "deleteAll";
 }

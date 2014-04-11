@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import data.as.a.service.adaptor.exception.ModelNotExistsException;
-import data.as.a.service.adaptor.impl.RetrieveAllAdaptor;
+import data.as.a.service.adaptor.impl.RetrieveBatchAdaptor;
 import data.as.a.service.adaptor.impl.RetrieveOneByIdAdaptor;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
@@ -36,7 +36,7 @@ public class SimpleDORetrieveController {
 			throw new ModelNotExistsException(modelName, version);
 		}
 
-		RetrieveAllAdaptor adaptor = new RetrieveAllAdaptor();
+		RetrieveBatchAdaptor adaptor = new RetrieveBatchAdaptor();
 		return adaptor.execute(dmo, null);
 	}
 
