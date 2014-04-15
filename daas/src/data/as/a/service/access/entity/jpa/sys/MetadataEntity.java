@@ -37,6 +37,9 @@ public class MetadataEntity {
 	@Column
 	private int version;
 	
+	@Column
+	private boolean discard = false;
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinColumn(name = "model_id")
 	private Set<FieldEntity> fields;
@@ -110,6 +113,14 @@ public class MetadataEntity {
 
 	public void setLastModifyTime(String lastModifyTime) {
 		this.lastModifyTime = lastModifyTime;
+	}
+
+	public boolean isDiscard() {
+		return discard;
+	}
+
+	public void setDiscard(boolean discard) {
+		this.discard = discard;
 	}
 	
 }

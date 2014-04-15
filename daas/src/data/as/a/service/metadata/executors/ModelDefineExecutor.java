@@ -8,6 +8,7 @@ import net.sf.json.JSONObject;
 import data.as.a.service.access.entity.jpa.sys.MetadataEntity;
 import data.as.a.service.access.repo.jpa.sys.MetadataRepository;
 import data.as.a.service.exception.SystemException;
+import data.as.a.service.exception.UserException;
 import data.as.a.service.generator.entity.EntityClassGenerator;
 import data.as.a.service.metadata.MetadataExecutor;
 import data.as.a.service.metadata.config.MetadataAccessConfig;
@@ -15,11 +16,12 @@ import data.as.a.service.metadata.convert.DataModel2MetadataEntityConverter;
 import data.as.a.service.metadata.convert.MetadataEntity2JSONConverter;
 import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.exception.ModelExistsException;
+import data.as.a.service.metadata.exception.SameNameWithDiscardModelException;
 
 public class ModelDefineExecutor implements MetadataExecutor {
 
 	@Override
-	public JSONObject execute(DataModelObject dmo) throws ModelExistsException,
+	public JSONObject execute(DataModelObject dmo) throws UserException,
 			SystemException {
 
 		MetadataEntity meta = this.saveModelIntoDatabase(dmo);
@@ -28,13 +30,18 @@ public class ModelDefineExecutor implements MetadataExecutor {
 	}
 
 	private MetadataEntity saveModelIntoDatabase(DataModelObject dmo)
-			throws ModelExistsException {
+			throws UserException {
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(
 				MetadataAccessConfig.class);
 		MetadataRepository repo = ctx.getBean(MetadataRepository.class);
 		MetadataEntity meta = repo.findByAppidAndModelNameAndVersion(
 				dmo.getAppid(), dmo.getModelName(), dmo.getVersion());
 		if (meta != null) {
+			if (meta.isDiscard()) {
+				throw new SameNameWithDiscardModelException(dmo.getModelName(),
+						dmo.getVersion());
+			}
+
 			throw new ModelExistsException(dmo.getModelName(), dmo.getVersion());
 		}
 

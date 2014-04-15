@@ -53,6 +53,8 @@ public class MetadataEntity2JSONConverter implements
 			}
 			json.put("__referenceModels", rarray);
 		}
+		
+		json.put("discard", meta.isDiscard());
 
 		return json;
 	}

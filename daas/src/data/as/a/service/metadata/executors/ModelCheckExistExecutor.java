@@ -25,7 +25,7 @@ public class ModelCheckExistExecutor implements
 		MetadataRepository repo = ctx.getBean(MetadataRepository.class);
 		MetadataEntity meta = repo.findByAppidAndModelNameAndVersion(
 				dmo.getAppid(), dmo.getModelName(), dmo.getVersion());
-		if (meta == null) {
+		if (meta == null || meta.isDiscard()) {
 			((ConfigurableApplicationContext) ctx).close();
 			return false;
 		}
