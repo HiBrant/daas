@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import data.as.a.service.adaptor.exception.ModelNotExistsException;
+import data.as.a.service.adaptor.exception.ModelNotAvailableException;
 import data.as.a.service.adaptor.impl.CreateOneAdaptor;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
@@ -36,7 +36,7 @@ public class DOCreateController {
 		
 		ModelCheckExistExecutor executor = new ModelCheckExistExecutor();
 		if (!executor.execute(dmo)) {
-			throw new ModelNotExistsException(modelName, version);
+			throw new ModelNotAvailableException(modelName, version);
 		}
 
 		CreateOneAdaptor adaptor = new CreateOneAdaptor();

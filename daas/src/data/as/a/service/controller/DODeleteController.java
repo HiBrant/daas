@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import data.as.a.service.adaptor.exception.ModelNotExistsException;
+import data.as.a.service.adaptor.exception.ModelNotAvailableException;
 import data.as.a.service.adaptor.impl.DeleteBatchAdaptor;
 import data.as.a.service.adaptor.impl.DeleteOneAdaptor;
 import data.as.a.service.exception.SystemException;
@@ -31,7 +31,7 @@ public class DODeleteController {
 		DataModelObject dmo = new DataModelObject(appid, modelName, null,
 				version);
 		if (!executor.execute(dmo)) {
-			throw new ModelNotExistsException(modelName, version);
+			throw new ModelNotAvailableException(modelName, version);
 		}
 
 		DeleteOneAdaptor adaptor = new DeleteOneAdaptor();
@@ -61,7 +61,7 @@ public class DODeleteController {
 				version);
 		ModelCheckExistExecutor executor = new ModelCheckExistExecutor();
 		if (!executor.execute(dmo)) {
-			throw new ModelNotExistsException(modelName, version);
+			throw new ModelNotAvailableException(modelName, version);
 		}
 
 		DeleteBatchAdaptor adaptor = new DeleteBatchAdaptor();

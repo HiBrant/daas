@@ -7,8 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 import data.as.a.service.access.entity.jpa.sys.MetadataEntity;
 import data.as.a.service.access.repo.jpa.sys.MetadataRepository;
 import data.as.a.service.exception.UserException;
-import data.as.a.service.metadata.datamodel.DataModelObject;
-import data.as.a.service.metadata.datamodel.SemanticsType;
 import data.as.a.service.metadata.exception.NoModelReferToThisIDException;
 
 @Service
@@ -23,13 +21,6 @@ public class ModelDeleteTransaction {
 		if (meta == null || meta.isDiscard()) {
 			throw new NoModelReferToThisIDException(modelId);
 		}
-
-//		SemanticsType semanticsType = SemanticsType.BASE;
-//		if (meta.getSemantics().equals("ACID")) {
-//			semanticsType = SemanticsType.ACID;
-//		}
-//		DataModelObject dmo = new DataModelObject(meta.getAppid(),
-//				meta.getModelName(), semanticsType, meta.getVersion());
 		
 		meta.setDiscard(true);
 		repo.save(meta);

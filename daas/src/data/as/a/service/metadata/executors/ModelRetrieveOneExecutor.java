@@ -7,7 +7,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import net.sf.json.JSONObject;
 import data.as.a.service.access.entity.jpa.sys.MetadataEntity;
 import data.as.a.service.access.repo.jpa.sys.MetadataRepository;
-import data.as.a.service.adaptor.exception.ModelNotExistsException;
+import data.as.a.service.adaptor.exception.ModelNotAvailableException;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
 import data.as.a.service.metadata.MetadataExecutor;
@@ -24,7 +24,7 @@ public class ModelRetrieveOneExecutor implements MetadataExecutor {
 		MetadataEntity meta = this.retrieveOne(
 				dmo.getAppid(), dmo.getModelName(), dmo.getVersion());
 		if (meta == null) {
-			throw new ModelNotExistsException(dmo.getModelName(),
+			throw new ModelNotAvailableException(dmo.getModelName(),
 					dmo.getVersion());
 		}
 		return new MetadataEntity2JSONConverter().convert(meta);
