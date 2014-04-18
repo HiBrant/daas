@@ -1,32 +1,18 @@
 package data.as.a.service.adaptor.condition;
 
-import java.util.ArrayList;
-import java.util.List;
+import data.as.a.service.exception.SystemException;
+import data.as.a.service.exception.UserException;
 
 public class Conditions {
 
 	private ConditionNode root;
-	private StringBuilder builder = new StringBuilder();
-	private List<String> values = new ArrayList<>();
-
-	public ConditionNode getConditionTreeRoot() {
-		return root;
-	}
-
-	public void setConditionTreeRoot(ConditionNode root) {
+	
+	public Conditions(ConditionNode root) {
 		this.root = root;
 	}
 	
-	private void iterate(ConditionNode node) {
-		
-		if (node != null) {
-			iterate(node.getLeft());
-			readNode(node);
-			iterate(node.getRight());
-		}
+	public boolean judge(Object entity) throws SystemException, UserException {
+		return root.judge(entity);
 	}
 	
-	private void readNode(ConditionNode node) {
-		
-	}
 }

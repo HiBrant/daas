@@ -26,4 +26,9 @@ public class Lexis {
 		this.type = type;
 	}
 	
+	@Override
+	public String toString() {
+		return "< " + token + ", " + type.name() + " >";
+	}
+	
 }

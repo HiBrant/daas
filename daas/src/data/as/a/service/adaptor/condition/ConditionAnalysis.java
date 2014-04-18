@@ -16,11 +16,23 @@ public class ConditionAnalysis {
 			throws IllegalQueryExpressionException {
 		this.str = expression;
 		List<Lexis> list = this.lexicalAnalyse();
+		
+//		for (Lexis lex: list) {
+//			System.out.println(lex);
+//		}
+//		System.out.println("=================================");
+		
 		list = this.toPostfixExpression(list);
+		
+//		for (Lexis lex: list) {
+//			System.out.println(lex);
+//		}
+//		System.out.println("=================================");
+		
 		return this.toQueryConditions(list);
 	}
 
-	private List<Lexis> lexicalAnalyse() {
+	private List<Lexis> lexicalAnalyse() throws IllegalQueryExpressionException {
 
 		int begin = 0;
 		int end = begin;
@@ -30,15 +42,15 @@ public class ConditionAnalysis {
 		while (begin < len) {
 			while (end < len) {
 				char ch = str.charAt(end);
-				if (ch == '*' || ch == '|') {
+				if (ch == '*' || ch == '|' || ch == '(' || ch == ')') {
 					if (begin == end) {
 						String token = str.substring(begin, end + 1);
-						Lexis lex = new Lexis(token, LexicalType.get(token));
+						Lexis lex = new Lexis(token, LexicalType.fromString(token));
 						list.add(lex);
 						end = begin = end + 1;
 					} else {
 						String token = str.substring(begin, end);
-						Lexis lex = new Lexis(token, LexicalType.get(token));
+						Lexis lex = new Lexis(token, LexicalType.fromString(token));
 						list.add(lex);
 						begin = end;
 					}
@@ -47,13 +59,13 @@ public class ConditionAnalysis {
 						end++;
 					} else {
 						String token = str.substring(begin, end);
-						Lexis lex = new Lexis(token, LexicalType.get(token));
+						Lexis lex = new Lexis(token, LexicalType.fromString(token));
 						list.add(lex);
 						begin = end;
 					}
 				} else if (ch == ']') {
 					String token = str.substring(begin, end + 1);
-					Lexis lex = new Lexis(token, LexicalType.get(token));
+					Lexis lex = new Lexis(token, LexicalType.fromString(token));
 					list.add(lex);
 					end = begin = end + 1;
 				} else {
@@ -62,10 +74,14 @@ public class ConditionAnalysis {
 			}
 			if (begin != end) {
 				String token = str.substring(begin, end);
-				Lexis lex = new Lexis(token, LexicalType.get(token));
+				Lexis lex = new Lexis(token, LexicalType.fromString(token));
 				list.add(lex);
 				begin = end;
 			}
+		}
+		
+		if (list.size() < 3) {
+			throw new IllegalQueryExpressionException(str);
 		}
 
 		return list;
@@ -78,10 +94,17 @@ public class ConditionAnalysis {
 		for (Lexis lex : list) {
 			if (lex.getType() == LexicalType.operand) {
 				s0.push(lex);
+			} else if (lex.getType() == LexicalType.lb) {
+				s1.push(lex);
+			} else if (lex.getType() == LexicalType.rb) {
+				Lexis lexInS1;
+				while ((lexInS1 = s1.pop()).getType() != LexicalType.lb) {
+					s0.push(lexInS1);
+				}
 			} else {
 				boolean pass = true;
 				do {
-					if (s1.empty()) {
+					if (s1.empty() || s1.peek().getType() == LexicalType.lb) {
 						s1.push(lex);
 						pass = true;
 					} else if (lex.getType().priority() > s1.peek().getType()
@@ -134,8 +157,8 @@ public class ConditionAnalysis {
 			throw new IllegalQueryExpressionException(str);
 		}
 
-		Conditions conditions = new Conditions();
-		conditions.setConditionTreeRoot(s.pop());
+		Conditions conditions = new Conditions(s.pop());
 		return conditions;
 	}
+	
 }

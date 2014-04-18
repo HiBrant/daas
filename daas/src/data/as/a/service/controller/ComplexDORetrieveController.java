@@ -10,8 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import data.as.a.service.adaptor.condition.Conditions;
+import data.as.a.service.adaptor.convert.String2ConditionsConverter;
+import data.as.a.service.adaptor.exception.ModelNotAvailableException;
+import data.as.a.service.adaptor.impl.RetrieveBatchAdaptor;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
+import data.as.a.service.metadata.datamodel.DataModelObject;
+import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 
 @Controller
 public class ComplexDORetrieveController {
@@ -23,10 +29,21 @@ public class ComplexDORetrieveController {
 			@RequestHeader(value = "daas-app-id", required = false) String appid,
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
 			@PathVariable String modelName, @PathVariable int version,
-			@RequestParam("c") String conditions) throws UserException,
+			@RequestParam("c") String expression) throws UserException,
 			SystemException {
 
-		return conditions;
+		DataModelObject dmo = new DataModelObject(appid, modelName, null,
+				version);
+		ModelCheckExistExecutor executor = new ModelCheckExistExecutor();
+		if (!executor.execute(dmo)) {
+			throw new ModelNotAvailableException(modelName, version);
+		}
+		
+		String2ConditionsConverter converter = new String2ConditionsConverter();
+		Conditions conditions = converter.convert(expression);
+		
+		RetrieveBatchAdaptor adaptor = new RetrieveBatchAdaptor();
+		return adaptor.execute(dmo, conditions);
 	}
 
 	@RequestMapping(value = "/{modelName}/q", method = RequestMethod.GET)
