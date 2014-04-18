@@ -12,6 +12,9 @@ public enum LexicalType {
 	or(1),
 	lb(3),
 	rb(3),
+	sw(2),
+	ew(2),
+	ct(2),
 	operand(0);
 	
 	private int priority;
@@ -46,6 +49,12 @@ public enum LexicalType {
 			return lb;
 		} else if (str.equals(")")) {
 			return rb;
+		} else if (str.equals("[sw]")) {
+			return sw;
+		} else if (str.equals("[ew]")) {
+			return ew;
+		} else if (str.equals("[co]")) {
+			return ct;
 		} else {
 			return operand;
 		}

@@ -145,6 +145,25 @@ public class ConditionNode {
 				}
 			}
 		}
+		
+		if (type == LexicalType.sw || type == LexicalType.ew || type == LexicalType.ct) {
+			if (fieldType != String.class) {
+				throw new InvalidQueryOperatorException(left.getString(),
+						fieldType, type);
+			}
+			String a = (String) fieldValue;
+			String b = (String) targetValue;
+			switch (type) {
+			case sw:
+				return a.startsWith(b);
+			case ew:
+				return a.endsWith(b);
+			case ct:
+				return a.contains(b);
+			default:
+				break;
+			}
+		}
 
 		return false;
 	}
