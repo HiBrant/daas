@@ -8,6 +8,7 @@ import data.as.a.service.access.entity.jpa.sys.MetadataEntity;
 import data.as.a.service.access.repo.jpa.sys.MetadataRepository;
 import data.as.a.service.exception.UserException;
 import data.as.a.service.metadata.exception.NoModelReferToThisIDException;
+import data.as.a.service.util.DateFormatter;
 
 @Service
 public class ModelDeleteTransaction {
@@ -23,6 +24,7 @@ public class ModelDeleteTransaction {
 		}
 		
 		meta.setDiscard(true);
+		meta.setLastModifyTime(DateFormatter.now());
 		repo.save(meta);
 	}
 }

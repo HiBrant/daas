@@ -1,4 +1,4 @@
-package data.as.a.service.controller;
+package data.as.a.service.controller.api;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
