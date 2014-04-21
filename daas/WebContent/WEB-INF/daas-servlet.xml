@@ -14,4 +14,5 @@
 
 	<context:component-scan base-package="data.as.a.service.controller" />
 	
+	<mvc:resources mapping="/ui/**" location="/ui/" />
 </beans>
