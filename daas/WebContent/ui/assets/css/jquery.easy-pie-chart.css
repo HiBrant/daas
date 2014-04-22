@@ -1,0 +1,35 @@
+.easyPieChart {
+    position: relative;
+    text-align: center;
+}
+
+.easyPieChart canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.easy-pie-chart{
+   text-align: center;
+}
+
+.easy-pie-chart .number {
+    font-size: 16px;
+    font-weight: 300;
+    width: 85px;
+    margin: 0 auto;
+}
+
+.easy-pie-chart .title {
+    display: block;
+    text-align: center;
+    color: #333;
+    font-weight: 300;
+    font-size: 16px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.easy-pie-chart .title:hover {
+  color: #666;
+  text-decoration: none;
+}

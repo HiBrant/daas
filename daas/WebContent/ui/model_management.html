@@ -1,0 +1,68 @@
+<div id="" class="">
+	<div class="box">
+		<header>
+            <div class="icons"><i class="icon-building"></i></div>
+            <h5>All Data Models</h5>
+            <div class="toolbar">
+                <button class="btn btn-info btn-sm btn-grad" >Create New Model</button>
+            </div>
+        </header>
+		<div id="collapse4" class="body">
+			<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped sortableTable">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>_id</th>
+						<th>Semantics</th>
+						<th>More...</th>
+						<th>Edit</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					<!-- insert data here -->
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<script src="assets/lib/datatables/jquery.dataTables.js"></script>
+<script src="assets/lib/datatables/DT_bootstrap.js"></script>
+<script src="assets/lib/tablesorter/js/jquery.tablesorter.min.js"></script>
+<script src="assets/lib/touch-punch/jquery.ui.touch-punch.min.js"></script>
+<script>
+    var request_url = 'http://daas.w3.bluemix.net/';
+	$.ajax({
+		dataType:'json',
+        url: request_url + '__model',
+		type: 'get',
+		headers: {
+			'idaas-api-secret': 'xxxx',
+			'idaas-app-id': '0001'
+		},
+		success: function(data, textStatus, request) {
+			var data;
+			// console.dir(data);
+			for (var i = 0; i < data.length; i++) {
+				var tr = $("<tr></tr>");
+				tr.appendTo($("tbody"));
+				$("<td>" + data[i].modelName + "</td>").appendTo(tr);
+				$("<td>" + data[i]._id + "</td>").appendTo(tr);
+				$("<td>" + data[i].semantics + "</td>").appendTo(tr);
+				$("<td><a>more</a></td>").appendTo(tr);
+				$("<td><a><i class=\"icon-edit\"></i></a></td>").appendTo(tr);
+				$("<td><a><i class=\"icon-remove\"></i></a></td>").appendTo(tr);
+			}
+			$(".sortableTable").tablesorter();
+			$('#dataTable').dataTable({
+		        "sDom": "t<'row'<'col-lg-6'f><'col-lg-6 dt_pagination'p>>",
+		        "sPaginationType": "bootstrap",
+		        "bLengthChange": false,
+		        "iDisplayLength": 20
+		    });
+		},
+		error: function(request, textStatus, errorThrown) {
+			alert("Error!");
+		}
+	});
+</script>

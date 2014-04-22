@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans 
@@ -14,5 +14,10 @@
 
 	<context:component-scan base-package="data.as.a.service.controller" />
 	
-	<mvc:resources mapping="/ui/**" location="/ui/" />
+	<mvc:resources location="/ui/assets/" mapping="/ui/assets/**" cache-period="604800" />
+	
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/ui/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
 </beans>

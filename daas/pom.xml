@@ -96,5 +96,12 @@
 			<artifactId>asm-all</artifactId>
 			<version>4.2</version>
 		</dependency>
+
+		<!-- JSTL 1.2 -->
+		<dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
 	</dependencies>
 </project>

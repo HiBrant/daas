@@ -1,0 +1,127 @@
+<div class="col-lg-12">
+    <div class="text-center">
+        <ul class="stats_box" style="padding-left: 0px;">
+        <li>
+            <div class="sparkline bar_week"></div>
+            <div class="stat_text">
+            <strong>2.345</strong>Weekly Visit
+            <span class="percent down"> <i class="icon-caret-down"></i> -16%</span>
+            </div>
+        </li>
+        <li>
+            <div class="sparkline line_day"></div>
+            <div class="stat_text">
+            <strong>165</strong>Daily Visit
+            <span class="percent up"> <i class="icon-caret-up"></i> +23%</span>
+            </div>
+        </li>
+        <li>
+            <div class="sparkline pie_week"></div>
+            <div class="stat_text">
+            <strong>$2 345.00</strong>Weekly Sale
+            <span class="percent"> 0%</span>
+            </div>
+        </li>
+        <li>
+            <div class="sparkline stacked_month"></div>
+            <div class="stat_text">
+            <strong>$678.00</strong>Monthly Sale
+            <span class="percent down"> <i class="icon-caret-down"></i> -10%</span>
+            </div>
+        </li>
+        </ul>
+    </div>
+</div>
+<hr/>
+<div class="col-lg-6">
+    <div class="box">
+        <header>
+            <div class="icons"><i class="icon-bar-chart"></i></div>
+            <h5>Data Object Amount</h5>
+            <div class="toolbar">
+
+            </div>
+        </header>
+        <div id="collapse4" class="body">
+            <div id="line_chart" style="height: 333px;"></div>
+        </div>
+    </div>
+</div>
+<div class="row-fluit">
+    <div class="col-lg-6">
+        <div class="box">
+            <header>
+                <div class="icons"><i class="icon-bar-chart"></i></div>
+                <h5>Server Load</h5>
+                <div class="toolbar">
+
+                </div>
+            </header>
+            <div id="collapse4" class="body">
+                <div id="dynamic_chart" style="height: 125px;"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="box">
+            <header>
+                <div class="icons"><i class="icon-bar-chart"></i></div>
+                <h5>ACID / BASE / FILE</h5>
+                <div class="toolbar">
+
+                </div>
+            </header>
+            <div id="collapse4" class="body">
+                <div id="bar_chart" style="height: 125px;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-6">
+    <div class="box">
+        <header>
+            <div class="icons"><i class="icon-bar-chart"></i></div>
+            <h5>Location</h5>
+            <div class="toolbar">
+
+            </div>
+        </header>
+        <div id="collapse4" class="body">
+            <div id="pie_chart_6" style="height: 250px;"></div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-6">
+    <div class="box">
+        <header>
+            <div class="icons"><i class="icon-bar-chart"></i></div>
+            <h5>Location</h5>
+            <div class="toolbar">
+
+            </div>
+        </header>
+        <div id="collapse4" class="body">
+            <div id="donut" style="height: 250px;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- BEGIN PAGE LEVEL PLUGINS -->
+<script src="assets/lib/sparkline/jquery.sparkline.min.js"></script>
+<script src="assets/lib/flot/jquery.flot.js"></script>
+<script src="assets/lib/flot/jquery.flot.resize.js"></script>
+<script src="assets/lib/flot/jquery.flot.pie.js"></script>
+<script src="assets/lib/flot/jquery.flot.stack.js"></script>
+<script src="assets/lib/flot/jquery.flot.crosshair.js"></script>
+<!-- END PAGE LEVEL PLUGINS -->
+<script src="assets/js/dashboard.js"></script>
+<!-- <script src="assets/js/jquery.easypiechart.js" type="text/javascript"></script> -->
+<script>
+    jQuery(document).ready(function() {
+       Dashboard.initCharts();
+       Dashboard.initPieCharts();
+       Dashboard.initSparkline();
+       // Dashboard.initMiniCharts();
+    });
+
+</script>

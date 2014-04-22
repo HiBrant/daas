@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Metis</title>
+        <link rel="stylesheet" href="assets/lib/bootstrap/css/bootstrap.css">
+        <link rel="stylesheet" href="assets/css/main.css"/>
+        <link rel="stylesheet" href="assets/lib/Font-Awesome/css/font-awesome.css"/>
+        <link rel="stylesheet" href="assets/css/theme.css">
+
+        <script src="assets/lib/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="top" class="navbar-fixed-top">
+                <nav class="navbar navbar-inverse">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <header class="navbar-header">
+                      <a href="index.html" class="navbar-brand">
+      					<img src="assets/img/logo.png" style="margin-left: 20px;margin-top: 2px;">
+                      </a>
+                  </header>
+                    
+                    <div class="topnav">
+                        <div class="btn-toolbar">
+                            <div class="btn-group">
+                                <a data-placement="bottom" data-original-title="Show / Hide Sidebar" data-toggle="tooltip" class="btn btn-success btn-sm" id="changeSidebarPos">
+                                    <i class="icon-resize-horizontal"></i>
+                                </a>
+                            </div>
+                            <div class="btn-group">
+                                <a data-placement="bottom" data-original-title="Document" href="#" data-toggle="tooltip" class="btn btn-default btn-sm">
+                                    <i class="icon-file"></i>
+                                </a>
+                                <a data-toggle="modal" data-original-title="Help" data-placement="bottom" class="btn btn-default btn-sm" href="#helpModal">
+                                    <i class="icon-question-sign"></i>
+                                </a>
+                            </div>
+                            <div class="btn-group">
+                                <a href="login.html" data-toggle="tooltip" data-original-title="Logout" data-placement="bottom" class="btn btn-metis-1 btn-sm">
+                          <i class="icon-off"></i>
+                                </a>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </nav>
+                <!-- /.navbar -->
+            </div>
+            <div id="content" class="fullContent">
+                <div class="inner">
+                    <!-- content here-->
+                   	<div class="box">
+                    	<header>
+                    		<h5 class="text-primary">Create an Application</h5>
+                    		<div class="toolbar">
+                    			<button class="btn btn-info btn-sm btn-grad">Back to Dashboard</button>
+                    		</div>
+                    	</header>
+                    	<div class="body">
+	                    	<form class="form-horizontal wizardForm" id="create" action="" method="post">
+	                    		<fieldset class="step" id="first">
+		                    		<div class="form-group">
+			                            <label for="server_host" class="control-label col-lg-4">
+			                            	3-32 alphanumeric characters, underscores ok.
+			                            </label>
+			                            <div class="col-lg-8">
+			                                <input type="text" name="app_name" id="app_name" class="form-control">
+			                            </div>
+		                        	</div>
+	                    		</fieldset>
+	                    		
+	                    		<div class="form-actions">
+			                        <input class="navigation_button btn btn-primary" value="Create" type="submit"/>
+			                    </div>
+	                    	</form>
+	                    	
+	                    	<form class="form-horizontal wizardForm" id="platform" method="get" action="/daas-portal/resources/index.html" style="display: none;">
+		                    	<fieldset class="step" id="second">
+		                    		<div class="form-group">
+			                            <label for="server_host" class="control-label col-lg-4">
+			                            	Select a platform you'd like to start with.
+			                            </label>
+			                            <div class="col-lg-8" id="platform-select">
+			                                <img src="assets/img/platforms/ios.png"></img>
+			                                <img src="assets/img/platforms/android.png"></img>
+			                                <img src="assets/img/platforms/js.png"></img>
+			                            </div>
+		                        	</div>
+		                    	</fieldset>
+		                    	
+		                    	<div class="form-actions">
+			                        <input class="navigation_button btn btn-primary" value="Confirm" type="submit"/>
+			                    </div>
+		                    </form>
+                    	</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#wrap -->
+
+        <div id="footer">
+            <p>2013 &copy; Data as a Service</p>
+        </div>
+
+<!--         <script src="assets/lib/jquery-1.10.2.min.js"></script>
+        <script src="assets/lib/bootstrap/js/bootstrap.js"></script>
+        <script src="assets/js/main.js"></script> -->
+        
+        <script src="assets/lib/jquery-1.10.2.min.js"></script>
+        <script src="assets/lib/bootstrap/js/bootstrap.js"></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+        <script src="assets/lib/plupload/js/jquery.plupload.queue/jquery.plupload.queue.min.js"></script>
+		<script src="assets/lib/plupload/js/plupload.full.min.js"></script>
+		<script src="assets/lib/gritter/js/jquery.gritter.min.js"></script>
+		<script src="assets/lib/uniform/jquery.uniform.min.js"></script>
+		<script src="assets/lib/jasny/js/bootstrap-fileupload.js"></script>
+		<script src="assets/lib/formwizard/js/jquery.form.js"></script>
+		<script src="assets/lib/formwizard/js/jquery.form.wizard.js"></script>
+		<script src="assets/lib/validation/dist/jquery.validate.min.js"></script>
+		<script src="assets/lib/validation/localization/messages_ja.js"></script>
+		<script src="assets/lib/jquery.json-2.4.min.js"></script>
+
+        <script src="assets/js/main.js"></script>
+
+        <script type="text/javascript">
+        $(function() {
+
+			$("#create").submit(function() {
+
+				$.ajax({
+					url: "http://localhost:8080/daas-portal/app",
+					contentType: "application/json",
+					type: "post",
+					data: $.toJSON({
+						user_name: 'admin',
+						app_name: $("#app_name").val()
+					}),
+					dataType: "json",
+					success: function(data) {
+						console.log(data.msg);
+						
+						if (data.msg == "success") {
+							$("#create").hide();
+							$("#platform").show();
+							$(".box header h5").text("Select a Platform");
+						}
+						else {
+							alert("Internal Error!");
+						}
+					}
+				});
+				return false;
+			});
+
+			$("#platform-select img").click(function() {
+				$("#platform-select img").css("background", "#ffffff");
+				$(this).css("background", "#f3f3f3");
+			});
+        });
+        </script>
+ 
+
+    </body>
+</html>

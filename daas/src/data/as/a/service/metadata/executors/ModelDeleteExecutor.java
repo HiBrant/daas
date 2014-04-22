@@ -1,6 +1,7 @@
 package data.as.a.service.metadata.executors;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import data.as.a.service.exception.SystemException;
@@ -20,6 +21,7 @@ public class ModelDeleteExecutor implements
 				MetadataAccessConfig.class);
 		ModelDeleteTransaction trans = ctx.getBean(ModelDeleteTransaction.class);
 		trans.execute(modelId);
+		((ConfigurableApplicationContext) ctx).close();
 		return true;
 	}
 
