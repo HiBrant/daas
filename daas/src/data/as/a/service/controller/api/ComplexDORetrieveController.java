@@ -20,6 +20,7 @@ import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 
 @Controller
+@RequestMapping("/__data")
 public class ComplexDORetrieveController {
 
 	@RequestMapping(value = "/{modelName}/{version}/q", method = RequestMethod.GET)

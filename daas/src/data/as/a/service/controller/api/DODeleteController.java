@@ -17,6 +17,7 @@ import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 
 @Controller
+@RequestMapping("/__data")
 public class DODeleteController {
 
 	@RequestMapping(value = "/{modelName}/{version}/{_id}", method = RequestMethod.DELETE)

@@ -18,6 +18,7 @@ import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 
 @Controller
+@RequestMapping("/__data")
 public class SimpleDORetrieveController {
 
 	@RequestMapping(value = "/{modelName}/{version}/all", method = RequestMethod.GET)

@@ -20,6 +20,7 @@ import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 
 @Controller
+@RequestMapping("/__data")
 public class DOCreateController {
 	
 	@RequestMapping(value = "/{modelName}/{version}", method = RequestMethod.POST)

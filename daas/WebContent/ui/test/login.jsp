@@ -5,7 +5,7 @@
 <title>login</title>
 </head>
 <body>
-<form method="post" action="/daas/tohello">
+<form method="post" action="/daas/hello">
 	<input type="text" name="username" />
 	<input type="text" name="password" />
 	<input type="submit" />
