@@ -1,29 +1,32 @@
-<div id="" class="">
-	<div class="box">
-		<header>
-            <div class="icons"><i class="icon-building"></i></div>
-            <h5>All Data Models</h5>
-            <div class="toolbar">
-                <button class="btn btn-info btn-sm btn-grad" >Create New Model</button>
-            </div>
-        </header>
-		<div id="collapse4" class="body">
-			<table id="dataTable" class="table table-bordered table-condensed table-hover table-striped sortableTable">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>_id</th>
-						<th>Semantics</th>
-						<th>More...</th>
-						<th>Edit</th>
-						<th>Delete</th>
-					</tr>
-				</thead>
-				<tbody>
-					<!-- insert data here -->
-				</tbody>
-			</table>
+
+<div class="box">
+	<header>
+		<div class="icons">
+			<i class="icon-building"></i>
 		</div>
+		<h5>All Data Models</h5>
+		<div class="toolbar">
+			<button class="btn btn-info btn-sm btn-grad">Create New
+				Model</button>
+		</div>
+	</header>
+	<div id="collapse4" class="body">
+		<table id="dataTable"
+			class="table table-bordered table-condensed table-hover table-striped sortableTable">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>_id</th>
+					<th>Semantics</th>
+					<th>More...</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+			</thead>
+			<tbody>
+				<!-- insert data here -->
+			</tbody>
+		</table>
 	</div>
 </div>
 <script src="assets/lib/datatables/jquery.dataTables.js"></script>

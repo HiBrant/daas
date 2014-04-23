@@ -1,5 +1,7 @@
 package data.as.a.service.controller.ui;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,7 +17,8 @@ public class LogonController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public ModelAndView regist(@RequestParam String username,
-			@RequestParam String email, @RequestParam String password) {
+			@RequestParam String email, @RequestParam String password,
+			HttpSession session) {
 
 		UserService service = new UserService();
 		UserEntity user = service.register(username, password, email);
@@ -26,13 +29,15 @@ public class LogonController {
 					"Register: User has already existed with the same username or email!");
 		} else {
 			mv = new ModelAndView("index");
+			session.setAttribute("userId", user.get_id());
+			session.setAttribute("username", user.getUsername());
 		}
 		return mv;
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView login(@RequestParam String username,
-			@RequestParam String password) {
+			@RequestParam String password, HttpSession session) {
 
 		UserService service = new UserService();
 		UserEntity user = service.login(username, password);
@@ -43,7 +48,14 @@ public class LogonController {
 					"Login: Wrong password or unavailable username!");
 		} else {
 			mv = new ModelAndView("index");
+			session.setAttribute("userId", user.get_id());
+			session.setAttribute("username", user.getUsername());
 		}
 		return mv;
+	}
+	
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout() {
+		return "login";
 	}
 }
