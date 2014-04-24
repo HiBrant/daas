@@ -162,15 +162,27 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 				success: function(data) {
 					if (data.length > 0) {
 						for (idx in data) {
-							menu.append("<li id='drop_btn_" + idx + "'><a href='#'>" + data[idx]['appName'] + "</a></li>");
+							menu.append("<li id='drop_btn_" + idx + "' alt='" + data[idx]['appId'] + "'><a href='#'>" + data[idx]['appName'] + "</a></li>");
 							$("li#drop_btn_" + idx).click(function() {
 								$("div.btn-group a#dropdown-show").html("<i class=\"icon-angle-down\">&nbsp;&nbsp;" + $(this).text());
+								var appid = $(this).attr("alt");
+								$.ajax({
+									url: "<%=basePath%>current_app",
+									type: "get",
+									data: "appid=" + appid,
+									success: function(data) {
+										if (data == true) {
+											location.href = "index.jsp";
+										}
+									}
+								});
 							});
 						}
 						$("div.btn-group a#dropdown-show").html("<i class=\"icon-angle-down\">&nbsp;&nbsp;" + data[0]['appName']);
 					} else {
 						$("div.btn-group a#dropdown-show").text("NO APP NOW!");
 					}
+					
 					$(".inner").load("home.jsp");
 				}
 			});

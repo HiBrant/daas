@@ -60,4 +60,11 @@ public class ApplicationController {
 		
 		return array;
 	}
+	
+	@RequestMapping(value = "/current_app", method = RequestMethod.GET)
+	@ResponseBody
+	public boolean setCurrentApp(@RequestParam String appid) {
+		ApplicationService service = new ApplicationService();
+		return service.setCurrentApp(appid);
+	}
 }

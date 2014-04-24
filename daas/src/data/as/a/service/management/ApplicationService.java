@@ -44,8 +44,24 @@ public class ApplicationService {
 		AppRepository repo = ctx.getBean(AppRepository.class);
 		Order order = new Order(Direction.DESC, "timestamp");
 		Sort sort = new Sort(order);
-		List<AppEntity> list = repo.findAll(sort);
+		List<AppEntity> list = repo.findByUserId(userId, sort);
 		((ConfigurableApplicationContext) ctx).close();
 		return list;
+	}
+	
+	public boolean setCurrentApp(String appid) {
+		ApplicationContext ctx = new AnnotationConfigApplicationContext(
+				MetadataAccessConfig.class);
+		AppRepository repo = ctx.getBean(AppRepository.class);
+		AppEntity app = repo.findOne(appid);
+		boolean result = true;
+		if (app == null) {
+			result = false;
+		} else {
+			app.setTimestamp(new Date().getTime());
+			repo.save(app);
+		}
+		((ConfigurableApplicationContext) ctx).close();
+		return result;
 	}
 }

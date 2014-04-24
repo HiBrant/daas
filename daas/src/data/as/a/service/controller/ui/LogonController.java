@@ -55,7 +55,10 @@ public class LogonController {
 	}
 	
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout() {
+	public String logout(HttpSession session) {
+		session.removeAttribute("app");
+		session.removeAttribute("userId");
+		session.removeAttribute("username");
 		return "login";
 	}
 }
