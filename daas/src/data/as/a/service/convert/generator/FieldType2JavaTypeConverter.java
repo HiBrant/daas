@@ -1,4 +1,4 @@
-package data.as.a.service.generator.convert;
+package data.as.a.service.convert.generator;
 
 import data.as.a.service.convert.Converter;
 import data.as.a.service.metadata.datamodel.FieldType;

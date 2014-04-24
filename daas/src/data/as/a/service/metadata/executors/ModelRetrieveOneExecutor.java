@@ -7,12 +7,12 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import net.sf.json.JSONObject;
 import data.as.a.service.access.entity.jpa.sys.MetadataEntity;
 import data.as.a.service.access.repo.jpa.sys.MetadataRepository;
+import data.as.a.service.convert.metadata.MetadataEntity2JSONConverter;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
 import data.as.a.service.exception.common.ModelNotAvailableException;
 import data.as.a.service.metadata.MetadataExecutor;
 import data.as.a.service.metadata.config.MetadataAccessConfig;
-import data.as.a.service.metadata.convert.MetadataEntity2JSONConverter;
 import data.as.a.service.metadata.datamodel.DataModelObject;
 
 public class ModelRetrieveOneExecutor implements MetadataExecutor {

@@ -1,4 +1,4 @@
-package data.as.a.service.adaptor.convert;
+package data.as.a.service.convert.adaptor;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;

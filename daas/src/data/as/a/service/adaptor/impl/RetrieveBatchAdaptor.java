@@ -11,7 +11,7 @@ import net.sf.json.JSONObject;
 import data.as.a.service.adaptor.Adaptor;
 import data.as.a.service.adaptor.condition.Conditions;
 import data.as.a.service.adaptor.config.ApplicationContextHolder;
-import data.as.a.service.adaptor.convert.EntityList2JSONConverter;
+import data.as.a.service.convert.adaptor.EntityList2JSONConverter;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
 import data.as.a.service.exception.adaptor.FailToCallRepositoryMethodException;

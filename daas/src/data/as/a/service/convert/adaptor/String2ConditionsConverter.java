@@ -1,4 +1,4 @@
-package data.as.a.service.adaptor.convert;
+package data.as.a.service.convert.adaptor;
 
 import data.as.a.service.adaptor.condition.ConditionAnalysis;
 import data.as.a.service.adaptor.condition.Conditions;

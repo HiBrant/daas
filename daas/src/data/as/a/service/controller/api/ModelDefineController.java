@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import data.as.a.service.convert.metadata.JSON2DataModelConverter;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
 import data.as.a.service.metadata.MetadataExecutor;
-import data.as.a.service.metadata.convert.JSON2DataModelConverter;
 import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.executors.ModelDefineExecutor;
 

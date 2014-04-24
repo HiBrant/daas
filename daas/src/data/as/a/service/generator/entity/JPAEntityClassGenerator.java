@@ -6,8 +6,8 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 
+import data.as.a.service.convert.generator.FieldType2JavaTypeConverter;
 import data.as.a.service.generator.Generator;
-import data.as.a.service.generator.convert.FieldType2JavaTypeConverter;
 import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.datamodel.Field;
 import data.as.a.service.util.ClassPathUtil;

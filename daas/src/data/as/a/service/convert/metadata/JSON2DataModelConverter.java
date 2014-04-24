@@ -1,4 +1,4 @@
-package data.as.a.service.metadata.convert;
+package data.as.a.service.convert.metadata;
 
 import java.io.File;
 
