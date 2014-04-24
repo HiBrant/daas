@@ -1,4 +1,8 @@
-
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + 
+			":" + request.getServerPort() + path + "/";
+%>
 <div class="box">
 	<header>
 		<div class="icons">
@@ -15,12 +19,11 @@
 			class="table table-bordered table-condensed table-hover table-striped sortableTable">
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>_id</th>
-					<th>Semantics</th>
-					<th>More...</th>
-					<th>Edit</th>
-					<th>Delete</th>
+					<th width="30%">_id</th>
+					<th width="25%">Name</th>
+					<th width="10%">Semantics</th>
+					<th width="10%">Version</th>
+					<th>Operation</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,27 +37,35 @@
 <script src="assets/lib/tablesorter/js/jquery.tablesorter.min.js"></script>
 <script src="assets/lib/touch-punch/jquery.ui.touch-punch.min.js"></script>
 <script>
-    var request_url = 'http://daas.w3.bluemix.net/';
+$(function() {
 	$.ajax({
 		dataType:'json',
-        url: request_url + '__model',
+        url: "<%=basePath%>__model",
 		type: 'get',
 		headers: {
-			'idaas-api-secret': 'xxxx',
-			'idaas-app-id': '0001'
+			"daas-app-id": "${sessionScope.app._id}",
+			"daas-api-key": "${sessionScope.app.apiKey}"
 		},
-		success: function(data, textStatus, request) {
-			var data;
-			// console.dir(data);
+		success: function(json) {
+			var data = json.list;
 			for (var i = 0; i < data.length; i++) {
 				var tr = $("<tr></tr>");
 				tr.appendTo($("tbody"));
-				$("<td>" + data[i].modelName + "</td>").appendTo(tr);
 				$("<td>" + data[i]._id + "</td>").appendTo(tr);
+				$("<td>" + data[i].modelName + "</td>").appendTo(tr);
 				$("<td>" + data[i].semantics + "</td>").appendTo(tr);
-				$("<td><a>more</a></td>").appendTo(tr);
-				$("<td><a><i class=\"icon-edit\"></i></a></td>").appendTo(tr);
-				$("<td><a><i class=\"icon-remove\"></i></a></td>").appendTo(tr);
+				$("<td>" + data[i].version + "</td>").appendTo(tr);
+				var opTd = $("<td></td>");
+				opTd.appendTo(tr);
+				if (data[i].discard) {
+					opTd.text("DISCARDED");
+					opTd.css("color", "#f00");
+				} else {
+					var detailBtn = $("<a href='javascript:void(0);' title='Detail'><i class='icon-search'></i>Detail</a>");
+					var discardBtn = $("<a href='javascript:void(0);' title='Discard' style='margin-left: 25px;'><i class='icon-remove'></i>Discard</a>");
+					detailBtn.appendTo(opTd);
+					discardBtn.appendTo(opTd);
+				}
 			}
 			$(".sortableTable").tablesorter();
 			$('#dataTable').dataTable({
@@ -68,4 +79,5 @@
 			alert("Error!");
 		}
 	});
+});	
 </script>

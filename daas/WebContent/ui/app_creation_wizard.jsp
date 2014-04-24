@@ -1,7 +1,7 @@
 <%@ page language="java" pageEncoding="utf-8" contentType="text/html;charset=utf-8"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + 
+	String uiRoot = request.getScheme() + "://" + request.getServerName() + 
 			":" + request.getServerPort() + path + "/ui/";
 %>
 
@@ -41,7 +41,7 @@
 				alert("Error: Only alphanumeric characters and underscores are allowed!");
 			} else {
 				$.ajax({
-					url: "<%=basePath%>create_app",
+					url: "<%=uiRoot%>create_app",
 					dataType: "json",
 					type: "post",
 					data: "app_name=" + app_name,

@@ -2,14 +2,14 @@
 	contentType="text/html;charset=utf-8"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + 
+	String uiRoot = request.getScheme() + "://" + request.getServerName() + 
 			":" + request.getServerPort() + path + "/ui/";
 %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>DaaS</title>
+<title>Data as a Service</title>
 <link rel="stylesheet" href="assets/lib/bootstrap/css/bootstrap.css">
 <link rel="stylesheet" href="assets/css/main.css" />
 <link rel="stylesheet"
@@ -79,8 +79,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 						<div class="btn-group">
 							<a href="#" class="btn btn-success" data-toggle="dropdown"
 								style="border-top-right-radius: 4px; border-bottom-right-radius: 4px; width: 160px; text-align: left"
-								id="dropdown-show"> <!-- <i class="icon-apple"></i> -->
-								Loading...</i>
+								id="dropdown-show"> 
+								Loading...
 							</a>
 							<ul class="dropdown-menu">
 
@@ -110,9 +110,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 				<li><a href="#" name="data_management"> <i
 						class="icon-search"></i> Data Management
 				</a></li>
-				<li><a href="#" name="sdk_download"> <i
+		<!-- 	<li><a href="#" name="sdk_download"> <i
 						class="icon-download-alt"></i> SDK Download
-				</a></li>
+				</a></li> -->
 				<li><a href="#" name="app_setting"> <i class="icon-key"></i>
 						App Setting & Keys
 				</a></li>
@@ -156,7 +156,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 			var menu = $("div.btn-group ul.dropdown-menu");
 			menu.empty();
 			$.ajax({
-				url: "<%=basePath%>apps",
+				url: "<%=uiRoot%>apps",
 				type: "get",
 				dataType: "json",
 				success: function(data) {
@@ -167,7 +167,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 								$("div.btn-group a#dropdown-show").html("<i class=\"icon-angle-down\">&nbsp;&nbsp;" + $(this).text());
 								var appid = $(this).attr("alt");
 								$.ajax({
-									url: "<%=basePath%>current_app",
+									url: "<%=uiRoot%>current_app",
 									type: "get",
 									data: "appid=" + appid,
 									success: function(data) {
