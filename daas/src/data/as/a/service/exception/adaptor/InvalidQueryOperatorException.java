@@ -1,4 +1,4 @@
-package data.as.a.service.adaptor.exception;
+package data.as.a.service.exception.adaptor;
 
 import data.as.a.service.adaptor.condition.LexicalType;
 import data.as.a.service.exception.UserException;

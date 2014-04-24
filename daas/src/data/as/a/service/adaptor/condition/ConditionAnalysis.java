@@ -6,7 +6,7 @@ import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 
-import data.as.a.service.adaptor.exception.IllegalQueryExpressionException;
+import data.as.a.service.exception.adaptor.IllegalQueryExpressionException;
 
 public class ConditionAnalysis {
 

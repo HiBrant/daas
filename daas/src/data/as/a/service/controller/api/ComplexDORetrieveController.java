@@ -12,10 +12,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import data.as.a.service.adaptor.condition.Conditions;
 import data.as.a.service.adaptor.convert.String2ConditionsConverter;
-import data.as.a.service.adaptor.exception.ModelNotAvailableException;
 import data.as.a.service.adaptor.impl.RetrieveBatchAdaptor;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
+import data.as.a.service.exception.common.ModelNotAvailableException;
 import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 

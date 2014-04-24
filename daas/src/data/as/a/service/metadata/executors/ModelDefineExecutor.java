@@ -9,14 +9,14 @@ import data.as.a.service.access.entity.jpa.sys.MetadataEntity;
 import data.as.a.service.access.repo.jpa.sys.MetadataRepository;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
+import data.as.a.service.exception.metadata.ModelExistsException;
+import data.as.a.service.exception.metadata.SameNameWithDiscardModelException;
 import data.as.a.service.generator.entity.EntityClassGenerator;
 import data.as.a.service.metadata.MetadataExecutor;
 import data.as.a.service.metadata.config.MetadataAccessConfig;
 import data.as.a.service.metadata.convert.DataModel2MetadataEntityConverter;
 import data.as.a.service.metadata.convert.MetadataEntity2JSONConverter;
 import data.as.a.service.metadata.datamodel.DataModelObject;
-import data.as.a.service.metadata.exception.ModelExistsException;
-import data.as.a.service.metadata.exception.SameNameWithDiscardModelException;
 
 public class ModelDefineExecutor implements MetadataExecutor {
 

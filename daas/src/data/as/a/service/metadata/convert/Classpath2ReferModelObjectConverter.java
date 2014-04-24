@@ -4,8 +4,8 @@ import java.io.File;
 
 import data.as.a.service.convert.Converter;
 import data.as.a.service.exception.SystemException;
+import data.as.a.service.exception.common.ModelClassMissingException;
 import data.as.a.service.metadata.datamodel.DataModelObject;
-import data.as.a.service.metadata.exception.ModelClassMissingException;
 import data.as.a.service.util.ClassPathUtil;
 
 public class Classpath2ReferModelObjectConverter implements

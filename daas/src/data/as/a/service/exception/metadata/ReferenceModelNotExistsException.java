@@ -1,4 +1,4 @@
-package data.as.a.service.metadata.exception;
+package data.as.a.service.exception.metadata;
 
 import data.as.a.service.exception.UserException;
 

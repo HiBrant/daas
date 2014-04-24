@@ -1,4 +1,6 @@
-package data.as.a.service.exception;
+package data.as.a.service.exception.common;
+
+import data.as.a.service.exception.SystemException;
 
 public class StillDevelopingException extends SystemException {
 

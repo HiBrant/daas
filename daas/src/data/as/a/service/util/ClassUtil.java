@@ -1,7 +1,7 @@
 package data.as.a.service.util;
 
+import data.as.a.service.exception.common.ModelClassMissingException;
 import data.as.a.service.metadata.datamodel.DataModelObject;
-import data.as.a.service.metadata.exception.ModelClassMissingException;
 
 public class ClassUtil {
 	

@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import data.as.a.service.metadata.exception.RepeatedVariableNameException;
+import data.as.a.service.exception.metadata.RepeatedVariableNameException;
 
 public class Fields implements Iterable<Field> {
 	

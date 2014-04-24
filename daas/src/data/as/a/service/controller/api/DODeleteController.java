@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import data.as.a.service.adaptor.exception.ModelNotAvailableException;
 import data.as.a.service.adaptor.impl.DeleteBatchAdaptor;
 import data.as.a.service.adaptor.impl.DeleteOneAdaptor;
 import data.as.a.service.exception.SystemException;
 import data.as.a.service.exception.UserException;
+import data.as.a.service.exception.common.ModelNotAvailableException;
 import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 

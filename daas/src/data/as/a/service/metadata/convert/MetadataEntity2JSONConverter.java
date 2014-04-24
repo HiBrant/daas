@@ -7,8 +7,8 @@ import data.as.a.service.access.entity.jpa.sys.MetadataEntity;
 import data.as.a.service.access.entity.jpa.sys.ReferenceEntity;
 import data.as.a.service.convert.Converter;
 import data.as.a.service.exception.SystemException;
+import data.as.a.service.exception.common.ModelClassMissingException;
 import data.as.a.service.metadata.datamodel.DataModelObject;
-import data.as.a.service.metadata.exception.ModelClassMissingException;
 
 public class MetadataEntity2JSONConverter implements
 		Converter<MetadataEntity, JSONObject, SystemException> {

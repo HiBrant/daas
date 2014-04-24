@@ -1,4 +1,4 @@
-package data.as.a.service.generator.exception;
+package data.as.a.service.exception.generator;
 
 import data.as.a.service.exception.SystemException;
 

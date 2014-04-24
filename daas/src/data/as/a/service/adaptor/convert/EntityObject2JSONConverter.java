@@ -3,9 +3,9 @@ package data.as.a.service.adaptor.convert;
 import java.lang.reflect.Field;
 
 import net.sf.json.JSONObject;
-import data.as.a.service.adaptor.exception.FailToAccessEntityFieldException;
 import data.as.a.service.convert.Converter;
 import data.as.a.service.exception.SystemException;
+import data.as.a.service.exception.adaptor.FailToAccessEntityFieldException;
 
 public class EntityObject2JSONConverter implements
 		Converter<Object, JSONObject, SystemException> {
