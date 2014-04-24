@@ -10,4 +10,9 @@ public class IllegalQueryExpressionException extends UserException {
 		super("The query expression: " + expression + ", contains syntax errors.");
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_ILLEGAL_QUERY_EXPRESSION;
+	}
+
 }

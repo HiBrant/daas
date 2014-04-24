@@ -18,7 +18,7 @@ import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 
 @Controller
 @RequestMapping("/__data")
-public class DODeleteController {
+public class DODeleteController extends BaseController {
 
 	@RequestMapping(value = "/{modelName}/{version}/{_id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
@@ -27,6 +27,8 @@ public class DODeleteController {
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
 			@PathVariable String modelName, @PathVariable int version,
 			@PathVariable String _id) throws UserException, SystemException {
+		
+		this.verify(appid, apiKey);
 
 		ModelCheckExistExecutor executor = new ModelCheckExistExecutor();
 		DataModelObject dmo = new DataModelObject(appid, modelName, null,
@@ -57,6 +59,8 @@ public class DODeleteController {
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
 			@PathVariable String modelName, @PathVariable int version)
 			throws UserException, SystemException {
+		
+		this.verify(appid, apiKey);
 
 		DataModelObject dmo = new DataModelObject(appid, modelName, null,
 				version);

@@ -11,4 +11,9 @@ public class FailToInstantiateEntityObjectException extends SystemException {
 				+ "because of exception: " + e.getClass().getSimpleName(), e);
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_FAIL_TO_INSTANTIATE_ENTITY_OBJECT;
+	}
+
 }

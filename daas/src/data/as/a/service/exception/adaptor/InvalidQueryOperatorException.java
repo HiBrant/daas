@@ -15,4 +15,9 @@ public class InvalidQueryOperatorException extends UserException {
 						+ ", while the operator is [" + operator.name() + "].");
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_INVALID_QUERY_OPERATOR;
+	}
+
 }

@@ -11,4 +11,9 @@ public class ModelExistsException extends UserException {
 				+ "\", ver." + version);
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_MODEL_EXISTS;
+	}
+
 }

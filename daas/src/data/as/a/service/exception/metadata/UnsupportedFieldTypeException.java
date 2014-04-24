@@ -11,4 +11,9 @@ public class UnsupportedFieldTypeException extends UserException {
 				+ fieldType);
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_UNSUPPORTED_FIELD_TYPE;
+	}
+
 }

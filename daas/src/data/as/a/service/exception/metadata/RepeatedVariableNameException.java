@@ -10,4 +10,9 @@ public class RepeatedVariableNameException extends UserException {
 		super("Field with the name of \"" + variableName + "\" has already existed.");
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_REPEATED_VARIABLE_NAME;
+	}
+
 }

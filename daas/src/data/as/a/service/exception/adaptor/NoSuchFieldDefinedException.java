@@ -10,4 +10,9 @@ public class NoSuchFieldDefinedException extends UserException {
 		super("No field named " + fieldName + " defined in the data model");
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_NO_SUCH_FIELD_DEFINED;
+	}
+
 }

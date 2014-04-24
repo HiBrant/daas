@@ -21,7 +21,7 @@ import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 
 @Controller
 @RequestMapping("/__data")
-public class ComplexDORetrieveController {
+public class ComplexDORetrieveController extends BaseController {
 
 	@RequestMapping(value = "/{modelName}/{version}/q", method = RequestMethod.GET)
 	@ResponseBody
@@ -33,6 +33,8 @@ public class ComplexDORetrieveController {
 			@RequestParam("c") String expression) throws UserException,
 			SystemException {
 
+		this.verify(appid, apiKey);
+		
 		DataModelObject dmo = new DataModelObject(appid, modelName, null,
 				version);
 		ModelCheckExistExecutor executor = new ModelCheckExistExecutor();

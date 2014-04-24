@@ -11,4 +11,9 @@ public class SameNameWithDiscardModelException extends UserException {
 				+ modelName + ", ver." + version);
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_SAME_NAME_WITH_DISCARD_MODEL;
+	}
+
 }

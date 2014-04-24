@@ -19,7 +19,7 @@ import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 
 @Controller
 @RequestMapping("/__data")
-public class SimpleDORetrieveController {
+public class SimpleDORetrieveController extends BaseController {
 
 	@RequestMapping(value = "/{modelName}/{version}/all", method = RequestMethod.GET)
 	@ResponseBody
@@ -29,6 +29,8 @@ public class SimpleDORetrieveController {
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
 			@PathVariable String modelName, @PathVariable int version)
 			throws UserException, SystemException {
+		
+		this.verify(appid, apiKey);
 
 		DataModelObject dmo = new DataModelObject(appid, modelName, null,
 				version);
@@ -61,6 +63,8 @@ public class SimpleDORetrieveController {
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
 			@PathVariable String modelName, @PathVariable int version,
 			@PathVariable String _id) throws UserException, SystemException {
+		
+		this.verify(appid, apiKey);
 
 		DataModelObject dmo = new DataModelObject(appid, modelName, null,
 				version);

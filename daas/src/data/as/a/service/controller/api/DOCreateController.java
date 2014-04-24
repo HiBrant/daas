@@ -21,7 +21,7 @@ import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 
 @Controller
 @RequestMapping("/__data")
-public class DOCreateController {
+public class DOCreateController extends BaseController {
 	
 	@RequestMapping(value = "/{modelName}/{version}", method = RequestMethod.POST)
 	@ResponseBody
@@ -31,6 +31,8 @@ public class DOCreateController {
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
 			@PathVariable String modelName, @PathVariable int version,
 			@RequestBody String json) throws UserException, SystemException {
+		
+		this.verify(appid, apiKey);
 
 		DataModelObject dmo = new DataModelObject(appid, modelName, null,
 				version);

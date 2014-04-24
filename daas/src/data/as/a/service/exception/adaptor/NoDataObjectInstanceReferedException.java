@@ -13,4 +13,9 @@ public class NoDataObjectInstanceReferedException extends UserException {
 				+ version);
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_NO_DATA_OBJECT_INSTANCE_REFERED;
+	}
+
 }

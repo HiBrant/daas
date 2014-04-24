@@ -10,4 +10,9 @@ public class NoModelReferToThisIDException extends UserException {
 		super("There is no available model with the _id of " + modelId);
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_NO_MODEL_REFER_TO_THIS_ID;
+	}
+
 }

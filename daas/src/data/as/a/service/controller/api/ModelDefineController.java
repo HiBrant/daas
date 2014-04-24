@@ -19,7 +19,7 @@ import data.as.a.service.metadata.datamodel.DataModelObject;
 import data.as.a.service.metadata.executors.ModelDefineExecutor;
 
 @Controller
-public class ModelDefineController {
+public class ModelDefineController extends BaseController {
 
 	@RequestMapping(value = "/__model", method = RequestMethod.POST)
 	@ResponseBody
@@ -28,6 +28,8 @@ public class ModelDefineController {
 			@RequestHeader(value = "daas-app-id", required = false) String appid,
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
 			@RequestBody String json) throws UserException, SystemException {
+		
+		this.verify(appid, apiKey);
 
 		JSON2DataModelConverter converter = new JSON2DataModelConverter(appid);
 		DataModelObject dmo = converter.convert(JSONObject.fromObject(json));

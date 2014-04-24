@@ -1,6 +1,6 @@
 package data.as.a.service.exception;
 
-public class SystemException extends Exception {
+public abstract class SystemException extends DaaSException {
 	
 	private static final long serialVersionUID = -4533382718576520495L;
 	

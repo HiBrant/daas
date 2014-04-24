@@ -18,7 +18,7 @@ import data.as.a.service.metadata.executors.ModelRetrieveByNameExecutor;
 import data.as.a.service.metadata.executors.ModelRetrieveOneExecutor;
 
 @Controller
-public class ModelRetrieveController {
+public class ModelRetrieveController extends BaseController {
 
 	@RequestMapping(value = "/__model", method = RequestMethod.GET)
 	@ResponseBody
@@ -27,6 +27,8 @@ public class ModelRetrieveController {
 			@RequestHeader(value = "daas-app-id", required = false) String appid,
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey)
 			throws UserException, SystemException {
+		
+		this.verify(appid, apiKey);
 
 		DataModelObject dmo = new DataModelObject(appid, null, null);
 		MetadataExecutor executor = new ModelRetrieveAllExecutor();
@@ -41,6 +43,8 @@ public class ModelRetrieveController {
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
 			@PathVariable("modelName") String modelName) throws UserException,
 			SystemException {
+		
+		this.verify(appid, apiKey);
 
 		DataModelObject dmo = new DataModelObject(appid, modelName, null);
 		MetadataExecutor executor = new ModelRetrieveByNameExecutor();
@@ -56,6 +60,8 @@ public class ModelRetrieveController {
 			@PathVariable("modelName") String modelName,
 			@PathVariable("version") int version) throws UserException,
 			SystemException {
+		
+		this.verify(appid, apiKey);
 
 		DataModelObject dmo = new DataModelObject(appid, modelName, null, version);
 		MetadataExecutor executor = new ModelRetrieveOneExecutor();

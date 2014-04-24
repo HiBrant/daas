@@ -13,4 +13,9 @@ public class FailToAssignEntityFieldException extends SystemException {
 				+ e.getClass().getSimpleName(), e);
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_FAIL_TO_ASSIGN_ENTITY_FIELD;
+	}
+
 }

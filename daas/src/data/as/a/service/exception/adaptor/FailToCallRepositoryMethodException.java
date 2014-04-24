@@ -13,4 +13,9 @@ public class FailToCallRepositoryMethodException extends SystemException {
 				+ e.getClass().getSimpleName(), e);
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_FAIL_TO_CALL_REPOSITORY_METHOD;
+	}
+
 }

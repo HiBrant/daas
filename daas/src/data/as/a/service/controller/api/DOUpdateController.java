@@ -21,7 +21,7 @@ import data.as.a.service.metadata.executors.ModelCheckExistExecutor;
 
 @Controller
 @RequestMapping("/__data")
-public class DOUpdateController {
+public class DOUpdateController extends BaseController {
 
 	@RequestMapping(value = "/{modelName}/{version}/{_id}", method = RequestMethod.PUT)
 	@ResponseBody
@@ -32,6 +32,8 @@ public class DOUpdateController {
 			@PathVariable String modelName, @PathVariable int version,
 			@PathVariable String _id, @RequestBody String json)
 			throws UserException, SystemException {
+		
+		this.verify(appid, apiKey);
 
 		DataModelObject dmo = new DataModelObject(appid, modelName, null,
 				version);

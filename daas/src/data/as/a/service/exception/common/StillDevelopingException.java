@@ -12,4 +12,9 @@ public class StillDevelopingException extends SystemException {
 				+ ", method: " + methodname + "]. " + notes, null);
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_STILL_DELELOPING;
+	}
+
 }

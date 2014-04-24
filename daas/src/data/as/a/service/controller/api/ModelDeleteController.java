@@ -13,7 +13,7 @@ import data.as.a.service.exception.UserException;
 import data.as.a.service.metadata.executors.ModelDeleteExecutor;
 
 @Controller
-public class ModelDeleteController {
+public class ModelDeleteController extends BaseController {
 
 	@RequestMapping(value = "/__model/{_id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
@@ -21,6 +21,8 @@ public class ModelDeleteController {
 			@RequestHeader(value = "daas-app-id", required = false) String appid,
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
 			@PathVariable String _id) throws UserException, SystemException {
+		
+		this.verify(appid, apiKey);
 		
 		ModelDeleteExecutor executor = new ModelDeleteExecutor();
 		executor.execute(_id);

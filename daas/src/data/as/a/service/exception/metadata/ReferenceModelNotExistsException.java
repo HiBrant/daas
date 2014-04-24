@@ -11,4 +11,9 @@ public class ReferenceModelNotExistsException extends UserException {
 
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_REFERENCE_MODEL_NOT_EXISTS;
+	}
+
 }

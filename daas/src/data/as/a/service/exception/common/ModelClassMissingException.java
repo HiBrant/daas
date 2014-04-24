@@ -10,4 +10,9 @@ public class ModelClassMissingException extends SystemException {
 		super("The Java class file named " + classname + " is missing.", e);
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_MODEL_CLASS_MISSING;
+	}
+
 }

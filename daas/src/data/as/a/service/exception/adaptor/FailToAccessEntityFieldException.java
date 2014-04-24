@@ -13,4 +13,9 @@ public class FailToAccessEntityFieldException extends SystemException {
 				+ e.getClass().getSimpleName(), e);
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_FAIL_TO_ACCESS_ENTITY_FIELD;
+	}
+
 }

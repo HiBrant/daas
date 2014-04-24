@@ -11,4 +11,9 @@ public class UnsupportedReferenceTypeException extends UserException {
 				+ referType);
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_UNSUPPORTED_REFERENCE_TYPE;
+	}
+
 }

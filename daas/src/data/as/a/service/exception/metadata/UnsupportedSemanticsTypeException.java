@@ -10,4 +10,9 @@ public class UnsupportedSemanticsTypeException extends UserException {
 		super("Only 2 values are allowed for Attribute 'semantics': ACID or BASE.");
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_UNSUPPORTED_SEMANTICS_TYPE;
+	}
+
 }

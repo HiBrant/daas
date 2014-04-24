@@ -11,4 +11,9 @@ public class FieldTypeNotMatchDataModelException extends UserException {
 		super("Type of field: " + fieldName + " doesn't match its data model.");
 	}
 
+	@Override
+	public int getErrorCode() {
+		return CODE_FIELD_TYPE_NOT_MATCH_DATA_MODEL;
+	}
+
 }
