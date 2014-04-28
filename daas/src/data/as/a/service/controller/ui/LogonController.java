@@ -2,10 +2,13 @@ package data.as.a.service.controller.ui;
 
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONObject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import data.as.a.service.access.entity.jpa.sys.UserEntity;
@@ -53,12 +56,33 @@ public class LogonController {
 		}
 		return mv;
 	}
-	
+
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.removeAttribute("app");
 		session.removeAttribute("userId");
 		session.removeAttribute("username");
 		return "login";
+	}
+
+	@RequestMapping(value = "/change_pwd", method = RequestMethod.POST)
+	@ResponseBody
+	public Object changePassword(@RequestParam String oldPwd,
+			@RequestParam String newPwd, HttpSession session) {
+
+		UserService service = new UserService();
+		String username = (String) session.getAttribute("username");
+		JSONObject json = new JSONObject();
+		UserEntity user = service.login(username, oldPwd);
+		if (user == null) {
+			json.put("ok", 0);
+			json.put("msg", "Failure: Old password is invalid!");
+		} else {
+			user.setPassword(newPwd);
+			service.saveOne(user);
+			json.put("ok", 1);
+			json.put("msg", "Success!");
+		}
+		return json;
 	}
 }

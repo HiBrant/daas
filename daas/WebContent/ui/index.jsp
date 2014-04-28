@@ -113,11 +113,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 		<!-- 	<li><a href="#" name="sdk_download"> <i
 						class="icon-download-alt"></i> SDK Download
 				</a></li> -->
-				<li><a href="#" name="app_setting"> <i class="icon-key"></i>
+		<!-- 	<li><a href="#" name="app_setting"> <i class="icon-key"></i>
 						App Setting & Keys
-				</a></li>
+				</a></li> -->
 				<li><a href="#" name="user_setting"> <i class="icon-cogs"></i>
-						User Setting
+						Authentication Setting
 				</a></li>
 				<li><a href="http://daashome1.w3.bluemix.net/" target="_help">
 						<i class="icon-book"></i> Help
@@ -178,7 +178,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 								});
 							});
 						}
-						$("div.btn-group a#dropdown-show").html("<i class=\"icon-angle-down\">&nbsp;&nbsp;" + data[0]['appName']);
+						var name = data[0]['appName'];
+						if (name.length > 13) {
+							name = data[0]['appName'].substring(0, 13) + "...";
+						}
+						$("div.btn-group a#dropdown-show").html("<i class=\"icon-angle-down\">&nbsp;&nbsp;" + name);
 					} else {
 						$("div.btn-group a#dropdown-show").text("NO APP NOW!");
 					}

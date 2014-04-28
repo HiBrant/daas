@@ -23,7 +23,7 @@
 					<th width="25%">Name</th>
 					<th width="10%">Semantics</th>
 					<th width="10%">Version</th>
-					<th>Operation</th>
+					<th>Operations</th>
 				</tr>
 			</thead>
 			<tbody>

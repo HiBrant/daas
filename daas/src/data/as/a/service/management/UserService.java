@@ -38,4 +38,13 @@ public class UserService {
 		((ConfigurableApplicationContext) ctx).close();
 		return user;
 	}
+	
+	public void saveOne(UserEntity user) {
+		
+		ApplicationContext ctx = new AnnotationConfigApplicationContext(
+				MetadataAccessConfig.class);
+		UserRepository repo = ctx.getBean(UserRepository.class);
+		repo.save(user);
+		((ConfigurableApplicationContext) ctx).close();
+	}
 }

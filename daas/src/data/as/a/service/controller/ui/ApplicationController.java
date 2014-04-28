@@ -67,4 +67,27 @@ public class ApplicationController {
 		ApplicationService service = new ApplicationService();
 		return service.setCurrentApp(appid);
 	}
+	
+	@RequestMapping(value = "/delete_app", method = RequestMethod.POST)
+	@ResponseBody
+	public void deleteApp(@RequestParam String appid) {
+		ApplicationService service = new ApplicationService();
+		service.deleteOne(appid);
+	}
+	
+	@RequestMapping(value = "/regenerate_key", method = RequestMethod.POST)
+	@ResponseBody
+	public Object regenerateKey(@RequestParam String appid, HttpSession session) {
+		ApplicationService service = new ApplicationService();
+		JSONObject json = new JSONObject();
+		AppEntity app = service.changeApiKey(appid);
+		if (app == null) {
+			json.put("ok", 0);
+		} else {
+			json.put("ok", 1);
+			json.put("key", app.getApiKey());
+			session.setAttribute("app", app);
+		}
+		return json;
+	}
 }

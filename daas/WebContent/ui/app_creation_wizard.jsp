@@ -21,7 +21,7 @@
 				</div>
 			</div>
 
-			<div class="form-actions">
+			<div class="form-actions" style="text-align: right;">
 				<input class="navigation_button btn btn-primary" value="Create"
 					type="submit" />
 			</div>

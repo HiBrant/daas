@@ -19,7 +19,7 @@ import data.as.a.service.util.MD5Util;
 public class ApplicationService {
 
 	public AppEntity createOne(String appName, String userId) {
-		
+
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(
 				MetadataAccessConfig.class);
 		AppRepository repo = ctx.getBean(AppRepository.class);
@@ -31,13 +31,14 @@ public class ApplicationService {
 			app.setAppName(appName);
 			app.setUserId(userId);
 			app.setTimestamp(new Date().getTime());
-			app.setApiKey(MD5Util.get32bit(userId + appName + DateFormatter.now()));
+			app.setApiKey(MD5Util.get32bit(userId + appName
+					+ DateFormatter.now()));
 			app = repo.save(app);
 		}
 		((ConfigurableApplicationContext) ctx).close();
 		return app;
 	}
-	
+
 	public List<AppEntity> getAllApps(String userId) {
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(
 				MetadataAccessConfig.class);
@@ -48,7 +49,7 @@ public class ApplicationService {
 		((ConfigurableApplicationContext) ctx).close();
 		return list;
 	}
-	
+
 	public boolean setCurrentApp(String appid) {
 		ApplicationContext ctx = new AnnotationConfigApplicationContext(
 				MetadataAccessConfig.class);
@@ -63,5 +64,27 @@ public class ApplicationService {
 		}
 		((ConfigurableApplicationContext) ctx).close();
 		return result;
+	}
+
+	public void deleteOne(String appid) {
+		ApplicationContext ctx = new AnnotationConfigApplicationContext(
+				MetadataAccessConfig.class);
+		AppRepository repo = ctx.getBean(AppRepository.class);
+		repo.delete(appid);
+		((ConfigurableApplicationContext) ctx).close();
+	}
+
+	public AppEntity changeApiKey(String appid) {
+		ApplicationContext ctx = new AnnotationConfigApplicationContext(
+				MetadataAccessConfig.class);
+		AppRepository repo = ctx.getBean(AppRepository.class);
+		AppEntity app = repo.findOne(appid);
+		if (app != null) {
+			app.setApiKey(MD5Util.get32bit(app.get_id()
+					+ app.getAppName() + DateFormatter.now()));
+			repo.save(app);
+		}
+		((ConfigurableApplicationContext) ctx).close();
+		return app;
 	}
 }
