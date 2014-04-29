@@ -1,11 +1,13 @@
 package data.as.a.service.controller.api;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import data.as.a.service.adaptor.impl.RetrieveBatchAdaptor;
 import data.as.a.service.adaptor.impl.RetrieveOneByIdAdaptor;
@@ -21,6 +23,7 @@ public class SimpleDORetrieveController extends BaseController {
 
 	@RequestMapping(value = "/{modelName}/{version}/all", method = RequestMethod.GET)
 	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
 	public Object retrieveAll(
 			@RequestHeader(value = "daas-app-id", required = false) String appid,
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
@@ -42,6 +45,7 @@ public class SimpleDORetrieveController extends BaseController {
 
 	@RequestMapping(value = "/{modelName}/all", method = RequestMethod.GET)
 	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
 	public Object retrieveAll(
 			@RequestHeader(value = "daas-app-id", required = false) String appid,
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
@@ -53,6 +57,7 @@ public class SimpleDORetrieveController extends BaseController {
 
 	@RequestMapping(value = "/{modelName}/{version}/{_id}", method = RequestMethod.GET)
 	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
 	public Object retrieveOneById(
 			@RequestHeader(value = "daas-app-id", required = false) String appid,
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
@@ -74,6 +79,7 @@ public class SimpleDORetrieveController extends BaseController {
 
 	@RequestMapping(value = "/{modelName}/{_id}", method = RequestMethod.GET)
 	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
 	public Object retrieveOneById(
 			@RequestHeader(value = "daas-app-id", required = false) String appid,
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,

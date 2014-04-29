@@ -2,8 +2,10 @@ package data.as.a.service.controller.api;
 
 import net.sf.json.JSONException;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
 import data.as.a.service.access.entity.jpa.sys.AppEntity;
 import data.as.a.service.convert.controller.Exception2JSONConverter;
@@ -35,6 +37,7 @@ public class BaseController {
 	
 	@ExceptionHandler(UserException.class)
 	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
 	public Object handleUserException(UserException e) {
 		Exception2JSONConverter converter = new Exception2JSONConverter();
 		return converter.convert(e);
@@ -42,6 +45,7 @@ public class BaseController {
 	
 	@ExceptionHandler(SystemException.class)
 	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
 	public Object handleSystemException(SystemException e) {
 		Exception2JSONConverter converter = new Exception2JSONConverter();
 		return converter.convert(e);
@@ -49,6 +53,7 @@ public class BaseController {
 	
 	@ExceptionHandler(JSONException.class)
 	@ResponseBody
+	@ResponseStatus(HttpStatus.OK)
 	public Object handleJSONException(JSONException e) {
 		Exception2JSONConverter converter = new Exception2JSONConverter();
 		return converter.convert(e);
