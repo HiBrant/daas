@@ -15,7 +15,7 @@
 		</div>
 	</header>
 	<div id="collapse4" class="body">
-		<table id="dataTable"
+		<table id="model_table"
 			class="table table-bordered table-condensed table-hover table-striped sortableTable">
 			<thead>
 				<tr>
@@ -52,7 +52,7 @@ $(function() {
 			var details = "";
 			for (var i = 0; i < data.length; i++) {
 				var tr = $("<tr></tr>");
-				tr.appendTo($("tbody"));
+				tr.appendTo($("#model_table tbody"));
 				$("<td>" + data[i]._id + "</td>").appendTo(tr);
 				$("<td>" + data[i].modelName + "</td>").appendTo(tr);
 				$("<td>" + data[i].semantics + "</td>").appendTo(tr);
@@ -72,7 +72,7 @@ $(function() {
 				}
 			}
 			$(".sortableTable").tablesorter();
-			$('#dataTable').dataTable({
+			$('#model_table').dataTable({
 		        "sDom": "t<'row'<'col-lg-6'f><'col-lg-6 dt_pagination'p>>",
 		        "sPaginationType": "bootstrap",
 		        "bLengthChange": false,

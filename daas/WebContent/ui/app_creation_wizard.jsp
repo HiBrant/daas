@@ -37,7 +37,7 @@
 				alert("Error: App name must be at least 3 characters!")
 			} else if (app_name.length > 32) {
 				alert("Error: App name must be at most 32 characters!");
-			} else if (!/^\w+/.test(app_name)) {
+			} else if (!/^\w+$/.test(app_name)) {
 				alert("Error: Only alphanumeric characters and underscores are allowed!");
 			} else {
 				$.ajax({

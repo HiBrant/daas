@@ -2,7 +2,6 @@ package data.as.a.service.controller.api;
 
 import net.sf.json.JSONObject;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -10,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import data.as.a.service.adaptor.impl.CreateOneAdaptor;
 import data.as.a.service.exception.SystemException;
@@ -25,7 +23,6 @@ public class DOCreateController extends BaseController {
 	
 	@RequestMapping(value = "/{modelName}/{version}", method = RequestMethod.POST)
 	@ResponseBody
-	@ResponseStatus(HttpStatus.CREATED)
 	public Object create(
 			@RequestHeader(value = "daas-app-id", required = false) String appid,
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
@@ -48,7 +45,6 @@ public class DOCreateController extends BaseController {
 
 	@RequestMapping(value = "/{modelName}", method = RequestMethod.POST)
 	@ResponseBody
-	@ResponseStatus(HttpStatus.CREATED)
 	public Object create(
 			@RequestHeader(value = "daas-app-id", required = false) String appid,
 			@RequestHeader(value = "daas-api-key", required = false) String apiKey,
