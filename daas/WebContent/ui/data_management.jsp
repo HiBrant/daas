@@ -16,6 +16,20 @@
 		</div>
 	</header>
 	<div id="collapse4" class="body">
+		<table id="new_data_table"
+			class="table table-bordered table-condensed table-hover table-striped sortableTable">
+			<thead>
+				<tr>
+					<!-- insert title here -->
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<!-- insert data here -->
+				</tr>
+			</tbody>
+		</table>
+	
 		<table id="data_table"
 			class="table table-bordered table-condensed table-hover table-striped sortableTable">
 			<thead>
@@ -37,6 +51,8 @@
 <script src="assets/js/json-format.js"></script>
 <script type="text/javascript">
 $(function() {
+	var models;
+	
 	var select = $("div.toolbar select");
 	
 	$.ajax({
@@ -49,6 +65,8 @@ $(function() {
 		},
 		success: function(data) {
 			if (data.count > 0) {
+				models = data.list;
+				
 				$.each(data.list, function(i, model) {
 					if (!model.discard) {
 						var option = $("<option></option>");
@@ -63,8 +81,69 @@ $(function() {
 					if ($(this).val() == 0) {
 						return;
 					}
+					
 					var modelname = $(this).val().split(",")[0];
 					var version = $(this).val().split(",")[1];
+
+					$.each(models, function(i, m) {
+						if (m.modelName == modelname && m.version == version) {
+							var newThead = $("#new_data_table thead tr");
+							newThead.empty();
+							var newTbody = $("#new_data_table tbody tr").eq(0);
+							newTbody.empty();
+							$.each(m.__fields, function(fi, field) {
+								$("<th>"+ field.name + "("+ field.type +")" +"</th>").appendTo(newThead);
+								var newTd = $("<td></td>");
+								if (field.type == "BOOLEAN") {
+									$("<select class='new_data_input'><option>true</option><option>false</option></select>").appendTo(newTd);
+								} else {
+									$("<input class='new_data_input' type='text'>").appendTo(newTd);
+								}
+								newTd.appendTo(newTbody);
+							});
+							if ($("#submit_create_data_btn").size() == 0) {
+								$("<tr><td style='text-align: right;' colspan="+ m.__fields.length +"><button id='submit_create_data_btn' class='navigation_button btn btn-primary'>Submit</button></td></tr>").appendTo($("#new_data_table tbody"));
+								
+								$("#submit_create_data_btn").click(function() {
+									var newDataJson = "{";
+									var inputs = $(".new_data_input");
+									$.each(m.__fields, function(fi, field) {
+										newDataJson += field.name + ": ";
+										if (field.type == "STRING") {
+											newDataJson += "\""+ inputs.eq(fi).val() +"\"";
+										} else {
+											newDataJson += inputs.eq(fi).val();
+										}
+										if (fi != m.__fields.length - 1) {
+											newDataJson += ", ";
+										}
+									});
+									newDataJson += "}";
+									
+									$.ajax({
+										url: "<%=basePath%>__data/" + modelname + "/" + version,
+										type: "post",
+										contentType: "application/json",
+										dataType: "json",
+										data: newDataJson,
+										headers: {
+											"daas-app-id": "${sessionScope.app._id}",
+											"daas-api-key": "${sessionScope.app.apiKey}"
+										},
+										success: function(data) {
+											if (data.code) {
+												alert("Error\nCode: " + data.code + "\n" + data.msg);
+											} else {
+												alert("Success!");
+												$(".inner").empty();
+												$(".inner").load("data_management.jsp");;
+											}
+										}
+									});
+								});
+							}
+						}
+					});
 					
 					$.ajax({
 						url: "<%=basePath%>__data/" + modelname + "/" + version + "/all",
